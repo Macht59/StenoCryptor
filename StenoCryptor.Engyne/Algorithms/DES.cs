@@ -1,8 +1,9 @@
-﻿using System;
+﻿using StenoCryptor.Interfaces;
+using System;
 
 namespace StenoCryptor.Engyne.Algorithms
 {
-    public class DES
+    public class DES : ICryptor
     {
         #region Contants
 
@@ -321,5 +322,10 @@ namespace StenoCryptor.Engyne.Algorithms
         }
 
         #endregion 3DES
+
+        public void Encrypt(IContainer container, IKey key)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

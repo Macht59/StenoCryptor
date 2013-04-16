@@ -1,6 +1,7 @@
-﻿namespace StenoCryptor.Engyne.Algorithms
+﻿using StenoCryptor.Interfaces;
+namespace StenoCryptor.Engyne.Algorithms
 {
-    public class AES
+    public class AES : ICryptor
     {
         #region Constants
 
@@ -409,5 +410,10 @@
         }
 
         #endregion KeyGenerator
+
+        public void Encrypt(IContainer container, IKey key)
+        {
+            throw new System.NotImplementedException();
+        }
     }
 }
