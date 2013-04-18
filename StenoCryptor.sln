@@ -12,6 +12,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".nuget", ".nuget", "{901762
 		.nuget\packages.config = .nuget\packages.config
 	EndProjectSection
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "StenoCryptor.Commons", "StenoCryptor.Commons\StenoCryptor.Commons.csproj", "{FF6DBB51-3CB8-40C4-9005-DBB0CD11B007}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -30,6 +32,10 @@ Global
 		{72B1CFEC-A3E8-46B0-B07E-13D3649186B6}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{72B1CFEC-A3E8-46B0-B07E-13D3649186B6}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{72B1CFEC-A3E8-46B0-B07E-13D3649186B6}.Release|Any CPU.Build.0 = Release|Any CPU
+		{FF6DBB51-3CB8-40C4-9005-DBB0CD11B007}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FF6DBB51-3CB8-40C4-9005-DBB0CD11B007}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FF6DBB51-3CB8-40C4-9005-DBB0CD11B007}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FF6DBB51-3CB8-40C4-9005-DBB0CD11B007}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
