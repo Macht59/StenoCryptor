@@ -1,0 +1,30 @@
+<?xml version="1.0"?>
+<package xmlns="http://schemas.microsoft.com/packaging/2011/08/nuspec.xsd">
+  <metadata>
+    <id>YUICompressor.NET</id>
+    <version>1.7.1.0</version>
+    <title>YUICompressor .NET</title>
+    <authors>Pure Krome, Tony Butler, Justin Etheredge, Daniel Crenna</authors>
+    <owners>Pure Krome, Tony Butler, Justin Etheredge, Daniel Crenna</owners>
+    <licenseUrl>http://yuicompressor.codeplex.com/license/</licenseUrl>
+    <projectUrl>http://yuicompressor.codeplex.com/</projectUrl>
+    <iconUrl>http://download.codeplex.com/Project/Download/FileDownload.aspx?ProjectName=YUICompressor&amp;DownloadId=36338&amp;Build=17450/</iconUrl>
+    <requireLicenseAcceptance>false</requireLicenseAcceptance>
+    <description>This library allow you to minify and/or combine any Javascript and/or Cascading Style Sheets. It includes an MSBuild task so TFS or Web Applications (MVC or WebForms) can automate this process, per build. 
+            
+This is a direct .NET port of the original Yahoo! UI Library: YUI Compressor.</description>
+    <summary>Minify and/or Combine JavaScript and/or Cascading Style Sheets.</summary>
+    <releaseNotes>This patch release is targeting some important bugfixes, mainly around Culture and non English settings on the consumer's computer or build server.
+
+- BugFix: Issue 9876 - Invariant Culture is now the default
+- Feature: Errors are exposed better in the MS Build Task
+- BugFix: CultureInfo correct sets and resets for JS compressing.
+- BugFix: An unterminated css comment is now removed correctly</releaseNotes>
+    <copyright>2008 - 2012</copyright>
+    <tags>compression, minification, obfuscation, minify, combine, javascript, js, CSS, cascading style sheets</tags>
+    <references>
+      <reference file="EcmaScript.NET.modified.dll" />
+      <reference file="Yahoo.Yui.Compressor.dll" />
+    </references>
+  </metadata>
+</package>
