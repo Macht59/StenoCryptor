@@ -123,11 +123,23 @@
   <data name="CryptingType" xml:space="preserve">
     <value>Crypting Type</value>
   </data>
+  <data name="DetectDwm" xml:space="preserve">
+    <value>Detect DWM</value>
+  </data>
+  <data name="EmbedDwm" xml:space="preserve">
+    <value>Embed DWM</value>
+  </data>
   <data name="EmbedingType" xml:space="preserve">
     <value>Embeding Type</value>
   </data>
+  <data name="ExtractDwm" xml:space="preserve">
+    <value>Extract DWM</value>
+  </data>
   <data name="Go" xml:space="preserve">
     <value>Go</value>
+  </data>
+  <data name="Home_" xml:space="preserve">
+    <value>Home</value>
   </data>
   <data name="Message" xml:space="preserve">
     <value>Message</value>

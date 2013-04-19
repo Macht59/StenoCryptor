@@ -10,7 +10,10 @@
 <body>
     <nav>
         <ul>
-            <li>@Html.ActionLink("", "")</li>
+            <li>@Html.ActionLink(Home.Home_, HomeControllerActions.INDEX)</li>
+            <li>@Html.ActionLink(Home.EmbedDwm, HomeControllerActions.EMBED)</li>
+            <li>@Html.ActionLink(Home.ExtractDwm, HomeControllerActions.EXTRACT)</li>
+            <li>@Html.ActionLink(Home.DetectDwm, HomeControllerActions.DETECT)</li>
         </ul>
     </nav>
     @RenderBody()

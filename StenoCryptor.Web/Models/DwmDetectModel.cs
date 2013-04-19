@@ -7,7 +7,7 @@ using System.Web;
 
 namespace StenoCryptor.Web.Models
 {
-    public class DwmEmbedModel
+    public class DwmDetectModel
     {
         public Stream Container { get; set; }
 
