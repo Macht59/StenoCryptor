@@ -8,16 +8,19 @@
     @Scripts.Render("~/bundles/modernizr")
 </head>
 <body>
-    <nav>
-        <ul>
-            <li>@Html.ActionLink(Home.Home_, HomeControllerActions.INDEX)</li>
-            <li>@Html.ActionLink(Home.EmbedDwm, HomeControllerActions.EMBED)</li>
-            <li>@Html.ActionLink(Home.ExtractDwm, HomeControllerActions.EXTRACT)</li>
-            <li>@Html.ActionLink(Home.DetectDwm, HomeControllerActions.DETECT)</li>
-        </ul>
-    </nav>
-    @RenderBody()
-
+    <section id="main-container">
+        <nav id="main-navi-container">
+            <ul>
+                <li>@Html.ActionLink(Home.Home_, HomeControllerActions.INDEX)</li>
+                <li>@Html.ActionLink(Home.EmbedDwm, HomeControllerActions.EMBED)</li>
+                <li>@Html.ActionLink(Home.ExtractDwm, HomeControllerActions.EXTRACT)</li>
+                <li>@Html.ActionLink(Home.DetectDwm, HomeControllerActions.DETECT)</li>
+            </ul>
+        </nav>
+        <section id="render-body-section">
+            @RenderBody()
+        </section>
+    </section>
     @Scripts.Render("~/bundles/jquery")
     @RenderSection("scripts", required: false)
 </body>
