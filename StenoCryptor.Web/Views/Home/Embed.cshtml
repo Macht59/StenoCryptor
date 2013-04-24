@@ -1,7 +1,54 @@
 ﻿@model StenoCryptor.Web.Models.DwmEmbedModel
 
 @{
-    ViewBag.Title = Home.EmbedDwm;
+    ViewBag.Title = StenoCryptor.Web.Localization.Views.Home.EmbedDwm;
 }
 
 <h2>@ViewBag.Title</h2>
+
+@using (@Html.BeginForm())
+{
+    <div class="row-container">
+        <div class="row clear-fix">
+            <div class="row-label">
+                @Html.LabelFor(m => m.Container, StenoCryptor.Web.Localization.Models.Home.Container)
+            </div>
+            <div class="row-content">
+                <input type="file" name="photoFile" />
+            </div>
+        </div>
+        <div class="row clear-fix">
+            <div class="row-label">
+                @Html.LabelFor(m => m.EmbedType, StenoCryptor.Web.Localization.Models.Home.EmbedingType)
+            </div>
+            <div class="row-content">
+                @Html.DropDownListFor(m => m.EmbedType, new SelectList(Enum.GetValues(typeof(EmbedType))))
+            </div>
+        </div>
+        <div class="row clear-fix">
+            <div class="row-label">
+                @Html.LabelFor(m => m.CryptType, StenoCryptor.Web.Localization.Models.Home.CryptingType)
+            </div>
+            <div class="row-content">
+                @Html.DropDownListFor(m => m.CryptType, new SelectList(Enum.GetValues(typeof(CryptType))))
+            </div>
+        </div>
+        <div class="row clear-fix">
+            <div class="row-label">
+                @Html.LabelFor(m => m.Message, StenoCryptor.Web.Localization.Models.Home.Message)
+            </div>
+            <div class="row-content">
+                @Html.TextAreaFor(m => m.Message)
+            </div>
+        </div>
+        <div class="row clear-fix">
+            @Html.ValidationSummary(false)
+        </div>
+        <div class="row clear-fix">
+            <div class="row-label hidden-fix">.</div>
+            <div class="row-content">
+                <input type="submit" value="@StenoCryptor.Web.Localization.Views.Home.Go" class="submit-button" />
+            </div>
+        </div>
+    </div>
+}

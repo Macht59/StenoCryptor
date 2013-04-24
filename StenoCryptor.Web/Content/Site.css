@@ -69,7 +69,7 @@ textarea {
     display: none;
 }
 
-/* Styles fot master page
+/* Styles fot pages
 -----------------------------------------------------------*/
 
 #main-container {
@@ -99,4 +99,36 @@ textarea {
 
 #render-body-section {
     padding: 20px;
+}
+
+.row-container {
+    width: 600px;
+}
+
+.row {
+    width: inherit;
+    display: block;
+    padding-top: 10px;
+}
+
+.row-label {
+    width: 250px;
+    text-align: right;
+    float:left;
+    padding-right: 10px;
+}
+
+.row-content {
+    float: left;
+}
+
+.clear-fix:after {
+    content: "";
+    display: block;
+    clear: both;
+    visibility: hidden;
+}
+
+.hidden-fix {
+    visibility: hidden;
 }
