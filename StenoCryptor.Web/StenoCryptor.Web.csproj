@@ -157,15 +157,20 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Localization\Models\Home.Designer.cs">
+    <Compile Include="Localization\Models\DwmEmbedModel.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>Home.resx</DependentUpon>
+      <DependentUpon>DwmEmbedModel.resx</DependentUpon>
     </Compile>
     <Compile Include="Localization\Views\Home.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>Home.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Localization\Views\Shared.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Shared.resx</DependentUpon>
     </Compile>
     <Compile Include="Models\DwmDetectModel.cs" />
     <Compile Include="Models\DwmEmbedModel.cs" />
@@ -283,6 +288,7 @@
     <Content Include="Views\Home\Embed.cshtml" />
     <Content Include="Views\Home\Extract.cshtml" />
     <Content Include="Views\Home\Detect.cshtml" />
+    <Content Include="Views\Home\Result.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\StenoCryptor.Commons\StenoCryptor.Commons.csproj">
@@ -298,13 +304,17 @@
     <Content Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Localization\Models\Home.resx">
+    <EmbeddedResource Include="Localization\Models\DwmEmbedModel.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
-      <LastGenOutput>Home.Designer.cs</LastGenOutput>
+      <LastGenOutput>DwmEmbedModel.Designer.cs</LastGenOutput>
     </EmbeddedResource>
     <EmbeddedResource Include="Localization\Views\Home.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>Home.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Localization\Views\Shared.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>Shared.Designer.cs</LastGenOutput>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

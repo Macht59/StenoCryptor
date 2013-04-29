@@ -6,11 +6,19 @@
 <html>
 <head>
     <meta name="viewport" content="width=device-width" />
-    <title>Error</title>
+    <title>@StenoCryptor.Web.Localization.Views.Shared.Error</title>
 </head>
 <body>
     <h2>
-        Sorry, an error occurred while processing your request.
+        @StenoCryptor.Web.Localization.Views.Shared.ErrorHeader
     </h2>
+
+    @{
+        if (TempData.Keys.Contains(TempDataKeys.ERROR))
+        {
+        <p>@TempData[TempDataKeys.ERROR].ToString()</p>
+        }
+    }
+
 </body>
 </html>

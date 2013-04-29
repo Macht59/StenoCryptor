@@ -6,20 +6,20 @@
 
 <h2>@ViewBag.Title</h2>
 
-@using (@Html.BeginForm())
+@using (@Html.BeginForm(HomeControllerActions.EMBED, HomeControllerActions.CONTROLLER, FormMethod.Post, new { enctype = "multipart/form-data" }))
 {
     <div class="row-container">
         <div class="row clear-fix">
             <div class="row-label">
-                @Html.LabelFor(m => m.Container, StenoCryptor.Web.Localization.Models.Home.Container)
+                @Html.Label("photoFile", StenoCryptor.Web.Localization.Models.DwmEmbedModel.Container)
             </div>
             <div class="row-content">
-                <input type="file" name="photoFile" />
+                <input type="file" name="photoFile" id="photoFile" data-val-required="*" data-val="true" />
             </div>
         </div>
         <div class="row clear-fix">
             <div class="row-label">
-                @Html.LabelFor(m => m.EmbedType, StenoCryptor.Web.Localization.Models.Home.EmbedingType)
+                @Html.LabelFor(m => m.EmbedType, StenoCryptor.Web.Localization.Models.DwmEmbedModel.EmbedingType)
             </div>
             <div class="row-content">
                 @Html.DropDownListFor(m => m.EmbedType, new SelectList(Enum.GetValues(typeof(EmbedType))))
@@ -27,7 +27,7 @@
         </div>
         <div class="row clear-fix">
             <div class="row-label">
-                @Html.LabelFor(m => m.CryptType, StenoCryptor.Web.Localization.Models.Home.CryptingType)
+                @Html.LabelFor(m => m.CryptType, StenoCryptor.Web.Localization.Models.DwmEmbedModel.CryptingType)
             </div>
             <div class="row-content">
                 @Html.DropDownListFor(m => m.CryptType, new SelectList(Enum.GetValues(typeof(CryptType))))
@@ -35,7 +35,7 @@
         </div>
         <div class="row clear-fix">
             <div class="row-label">
-                @Html.LabelFor(m => m.Message, StenoCryptor.Web.Localization.Models.Home.Message)
+                @Html.LabelFor(m => m.Message, StenoCryptor.Web.Localization.Models.DwmEmbedModel.Message)
             </div>
             <div class="row-content">
                 @Html.TextAreaFor(m => m.Message)

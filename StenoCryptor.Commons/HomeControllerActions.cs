@@ -8,6 +8,8 @@ namespace StenoCryptor.Commons
 {
     public static class HomeControllerActions
     {
+        public const string CONTROLLER = "Home";
+
         public const string INDEX = "Index";
 
         public const string EMBED = "Embed";
@@ -15,5 +17,9 @@ namespace StenoCryptor.Commons
         public const string EXTRACT = "Extract";
 
         public const string DETECT = "Detect";
+
+        public const string RESULT = "Result";
+
+        public const string DOWNLOAD = "Download";
     }
 }

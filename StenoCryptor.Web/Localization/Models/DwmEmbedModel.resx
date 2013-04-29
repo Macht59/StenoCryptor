@@ -117,37 +117,19 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="AppRepresentationText" xml:space="preserve">
-    <value>StenoCryptor is a web-applicatioin that aims to implement the best scientific researches into stenostography.</value>
+  <data name="Container" xml:space="preserve">
+    <value>Container:</value>
   </data>
-  <data name="DetectDwm" xml:space="preserve">
-    <value>Detect DWM</value>
+  <data name="CryptingType" xml:space="preserve">
+    <value>Crypting Type:</value>
   </data>
-  <data name="Download" xml:space="preserve">
-    <value>Download</value>
+  <data name="EmbedingType" xml:space="preserve">
+    <value>Embeding Type:</value>
   </data>
-  <data name="EmbedDwm" xml:space="preserve">
-    <value>Embed DWM</value>
+  <data name="ErrContainerRequired" xml:space="preserve">
+    <value>Message is required</value>
   </data>
-  <data name="ExtractDwm" xml:space="preserve">
-    <value>Extract DWM</value>
-  </data>
-  <data name="FileProcessed" xml:space="preserve">
-    <value>File {0} is sucessfuly processed.</value>
-  </data>
-  <data name="Go" xml:space="preserve">
-    <value>Go</value>
-  </data>
-  <data name="Home_" xml:space="preserve">
-    <value>Home</value>
-  </data>
-  <data name="Remains" xml:space="preserve">
-    <value>Remains</value>
-  </data>
-  <data name="Result" xml:space="preserve">
-    <value>Result</value>
-  </data>
-  <data name="Symbols" xml:space="preserve">
-    <value>Symbols</value>
+  <data name="Message" xml:space="preserve">
+    <value>Message:</value>
   </data>
 </root>
