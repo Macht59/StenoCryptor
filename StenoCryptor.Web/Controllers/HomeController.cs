@@ -10,6 +10,24 @@ namespace StenoCryptor.Web.Controllers
 {
     public class HomeController : Controller
     {
+        #region Constants
+
+        public const string CONTROLLER = "Home";
+
+        public const string INDEX = "Index";
+
+        public const string EMBED = "Embed";
+
+        public const string EXTRACT = "Extract";
+
+        public const string DETECT = "Detect";
+
+        public const string RESULT = "RESULT";
+
+        #endregion Constants
+
+        #region Actions
+
         [HttpGet]
         public ActionResult Index()
         {
@@ -31,9 +49,10 @@ namespace StenoCryptor.Web.Controllers
             if (ModelState.IsValid)
             {
                 TempData[TempDataKeys.FILE_NAME] = FileHelper.SaveFile(photoFile.InputStream, Path.GetFileName(photoFile.FileName));
+                TempData[TempDataKeys.CONTENT_TYPE] = photoFile.ContentType;
                 // process image
 
-                return RedirectToAction(HomeControllerActions.RESULT);
+                return RedirectToAction(HomeController.RESULT);
             }
 
             return View();
@@ -52,21 +71,17 @@ namespace StenoCryptor.Web.Controllers
         }
 
         [HttpGet]
-        public ActionResult Download(string fileName)
-        {
-            return View();
-        }
-
-        [HttpGet]
         public ActionResult Result()
         {
             if (!TempData.Keys.Contains(TempDataKeys.FILE_NAME))
             {
                 TempData[TempDataKeys.ERROR] = StenoCryptor.Web.Localization.Views.Shared.FileAccessError;
-                return View(SharedControllerActions.ERROR);
+                return View(SharedController.ERROR);
             }
 
-            return RedirectToAction(HomeControllerActions.DOWNLOAD, HomeControllerActions.CONTROLLER, new { fileName = TempData[TempDataKeys.FILE_NAME] });
+            return RedirectToAction(SharedController.DOWNLOAD, SharedController.CONTROLLER, new { fileName = TempData[TempDataKeys.FILE_NAME], contentType = TempData[TempDataKeys.CONTENT_TYPE] });
         }
+
+        #endregion Actions
     }
 }

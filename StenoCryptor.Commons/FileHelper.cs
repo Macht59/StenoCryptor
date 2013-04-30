@@ -11,6 +11,7 @@ namespace StenoCryptor.Commons
     {
         public static string SaveFile(Stream stream, string fileName)
         {
+            fileName = Path.Combine(Path.GetTempPath(), Path.GetFileName(fileName));
             using (FileStream fs = File.Create(fileName))
             {
                 byte[] bytesInStream = new byte[stream.Length];

@@ -43,9 +43,7 @@
     <Compile Include="CryptType.cs" />
     <Compile Include="EmbedType.cs" />
     <Compile Include="FileHelper.cs" />
-    <Compile Include="HomeControllerActions.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="SharedControllerActions.cs" />
     <Compile Include="TempDataKeys.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

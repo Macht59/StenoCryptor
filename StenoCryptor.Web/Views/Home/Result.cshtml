@@ -8,5 +8,5 @@
     @string.Format(StenoCryptor.Web.Localization.Views.Home.FileProcessed, System.IO.Path.GetFileName((string)TempData[TempDataKeys.FILE_NAME]))
 </p>
 <p>
-    @Html.ActionLink(StenoCryptor.Web.Localization.Views.Home.Download, HomeControllerActions.DOWNLOAD)
+    @Html.ActionLink(StenoCryptor.Web.Localization.Views.Home.Download, StenoCryptor.Web.Controllers.SharedController.DOWNLOAD)
 </p>
