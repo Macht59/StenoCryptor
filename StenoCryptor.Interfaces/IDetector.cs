@@ -1,7 +1,9 @@
-﻿namespace StenoCryptor.Interfaces
+﻿using StenoCryptor.Commons;
+
+namespace StenoCryptor.Interfaces
 {
     public interface IDetector
     {
-        bool Detect(IContainer container);
+        bool Detect(Container container);
     }
 }

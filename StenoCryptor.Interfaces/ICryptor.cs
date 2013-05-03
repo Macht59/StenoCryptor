@@ -1,7 +1,11 @@
-﻿namespace StenoCryptor.Interfaces
+﻿using StenoCryptor.Commons;
+
+namespace StenoCryptor.Interfaces
 {
     public interface ICryptor
     {
-        void Encrypt(IContainer container, IKey key);
+        Container Encrypt(Container container, Key key);
+
+        Container Decrypt(Container container, Key key);
     }
 }

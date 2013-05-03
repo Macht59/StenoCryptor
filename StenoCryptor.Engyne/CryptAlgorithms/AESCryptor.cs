@@ -1,7 +1,9 @@
-﻿using StenoCryptor.Interfaces;
-namespace StenoCryptor.Engyne.Algorithms
+﻿using StenoCryptor.Commons;
+using StenoCryptor.Interfaces;
+
+namespace StenoCryptor.Engyne.CryptAlgorithms
 {
-    public class AES : ICryptor
+    public class AESCryptor : ICryptor
     {
         #region Constants
 
@@ -83,7 +85,7 @@ namespace StenoCryptor.Engyne.Algorithms
 
         private byte _Nr;
 
-        public AES(ushort KeyLength)
+        public AESCryptor(ushort KeyLength)
         {
             switch (KeyLength)
             {
@@ -411,7 +413,14 @@ namespace StenoCryptor.Engyne.Algorithms
 
         #endregion KeyGenerator
 
-        public void Encrypt(IContainer container, IKey key)
+
+
+        public Container Encrypt(Container container, Key key)
+        {
+            throw new System.NotImplementedException();
+        }
+
+        public Container Decrypt(Container container, Key key)
         {
             throw new System.NotImplementedException();
         }

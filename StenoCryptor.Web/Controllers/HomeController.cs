@@ -50,6 +50,7 @@ namespace StenoCryptor.Web.Controllers
             {
                 TempData[TempDataKeys.FILE_NAME] = FileHelper.SaveFile(photoFile.InputStream, Path.GetFileName(photoFile.FileName));
                 TempData[TempDataKeys.CONTENT_TYPE] = photoFile.ContentType;
+                
                 // process image
 
                 return RedirectToAction(HomeController.RESULT);
@@ -79,7 +80,11 @@ namespace StenoCryptor.Web.Controllers
                 return View(SharedController.ERROR);
             }
 
-            return RedirectToAction(SharedController.DOWNLOAD, SharedController.CONTROLLER, new { fileName = TempData[TempDataKeys.FILE_NAME], contentType = TempData[TempDataKeys.CONTENT_TYPE] });
+            return View(new Models.File() 
+            { 
+                FileName = (string)TempData[TempDataKeys.FILE_NAME], 
+                ContentType = (string)TempData[TempDataKeys.CONTENT_TYPE] 
+            });
         }
 
         #endregion Actions

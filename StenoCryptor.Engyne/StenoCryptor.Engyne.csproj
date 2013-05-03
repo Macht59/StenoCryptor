@@ -39,11 +39,17 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Algorithms\AES.cs" />
-    <Compile Include="Algorithms\DES.cs" />
+    <Compile Include="CryptAlgorithms\AESCryptor.cs" />
+    <Compile Include="CryptAlgorithms\AlgorithmFactory.cs" />
+    <Compile Include="CryptAlgorithms\DESCryptor.cs" />
+    <Compile Include="CryptAlgorithms\ThreeDESCryptor.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\StenoCryptor.Commons\StenoCryptor.Commons.csproj">
+      <Project>{ff6dbb51-3cb8-40c4-9005-dbb0cd11b007}</Project>
+      <Name>StenoCryptor.Commons</Name>
+    </ProjectReference>
     <ProjectReference Include="..\StenoCryptor.Interfaces\StenoCryptor.Interfaces.csproj">
       <Project>{61eb1957-1e60-40e7-8787-eaf4ca8e25b2}</Project>
       <Name>StenoCryptor.Interfaces</Name>

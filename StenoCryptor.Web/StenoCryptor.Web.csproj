@@ -176,6 +176,7 @@
     <Compile Include="Models\DwmDetectModel.cs" />
     <Compile Include="Models\DwmEmbedModel.cs" />
     <Compile Include="Models\DwmExtractModel.cs" />
+    <Compile Include="Models\Model.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

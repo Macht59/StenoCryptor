@@ -1,6 +1,10 @@
-﻿@{
+﻿@model StenoCryptor.Web.Models.File 
+@{
     ViewBag.Title = StenoCryptor.Web.Localization.Views.Home.Result;
 }
+
+@Html.HiddenFor(m => m.FileName)
+@Html.HiddenFor(m => m.ContentType)
 
 <h2>@ViewBag.Title</h2>
 
@@ -8,5 +12,5 @@
     @string.Format(StenoCryptor.Web.Localization.Views.Home.FileProcessed, System.IO.Path.GetFileName((string)TempData[TempDataKeys.FILE_NAME]))
 </p>
 <p>
-    @Html.ActionLink(StenoCryptor.Web.Localization.Views.Home.Download, StenoCryptor.Web.Controllers.SharedController.DOWNLOAD)
+    @Html.ActionLink(StenoCryptor.Web.Localization.Views.Home.Download, StenoCryptor.Web.Controllers.SharedController.DOWNLOAD, StenoCryptor.Web.Controllers.SharedController.CONTROLLER, new { fileName = Model.FileName, contentType = Model.ContentType }, null)
 </p>

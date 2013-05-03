@@ -39,11 +39,15 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="IContainer.cs" />
     <Compile Include="ICryptor.cs" />
     <Compile Include="IDetector.cs" />
-    <Compile Include="IKey.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\StenoCryptor.Commons\StenoCryptor.Commons.csproj">
+      <Project>{ff6dbb51-3cb8-40c4-9005-dbb0cd11b007}</Project>
+      <Name>StenoCryptor.Commons</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
