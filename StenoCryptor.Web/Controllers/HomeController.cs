@@ -83,6 +83,22 @@ namespace StenoCryptor.Web.Controllers
         }
 
         [HttpGet]
+        public ActionResult EmbedResult()
+        {
+            if (!TempData.Keys.Contains(TempDataKeys.FILE_NAME))
+            {
+                TempData[TempDataKeys.ERROR] = StenoCryptor.Web.Localization.Views.Shared.FileAccessError;
+                return View(SharedController.ERROR);
+            }
+
+            return View(new Models.FileModel()
+            {
+                FileName = (string)TempData[TempDataKeys.FILE_NAME],
+                ContentType = (string)TempData[TempDataKeys.CONTENT_TYPE]
+            });
+        }
+
+        [HttpGet]
         public ActionResult Detect()
         {
             return View();
@@ -123,22 +139,6 @@ namespace StenoCryptor.Web.Controllers
         public ActionResult Extract()
         {
             return View();
-        }
-
-        [HttpGet]
-        public ActionResult EmbedResult()
-        {
-            if (!TempData.Keys.Contains(TempDataKeys.FILE_NAME))
-            {
-                TempData[TempDataKeys.ERROR] = StenoCryptor.Web.Localization.Views.Shared.FileAccessError;
-                return View(SharedController.ERROR);
-            }
-
-            return View(new Models.FileModel()
-            {
-                FileName = (string)TempData[TempDataKeys.FILE_NAME],
-                ContentType = (string)TempData[TempDataKeys.CONTENT_TYPE]
-            });
         }
 
         #endregion Actions
