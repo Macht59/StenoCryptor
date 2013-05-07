@@ -719,6 +719,10 @@ namespace StenoCryptor.Engyne.CryptAlgorithms
             return ms;
         }
 
+        #endregion ICryptor Implementation
+
+        #region IKeyAware Implementation
+
         public bool ValidateKey(string stringKey)
         {
             byte result;

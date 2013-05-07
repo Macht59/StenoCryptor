@@ -1,9 +1,7 @@
-﻿using Microsoft.Practices.Unity;
-using StenoCryptor.Commons;
+﻿using StenoCryptor.Commons;
 using StenoCryptor.Commons.Constants;
-using StenoCryptor.Commons.Enums;
-using StenoCryptor.Commons.Helpers;
 using StenoCryptor.Interfaces;
+using StenoCryptor.Web.Helpers;
 using System;
 using System.IO;
 using System.Web;
@@ -25,7 +23,9 @@ namespace StenoCryptor.Web.Controllers
 
         public const string DETECT = "Detect";
 
-        public const string RESULT = "EmbedResult";
+        public const string EMBED_RESULT = "EmbedResult";
+
+        public const string DETECT_RESULT = "DetectResult";
 
         #endregion Constants
 
@@ -64,7 +64,10 @@ namespace StenoCryptor.Web.Controllers
             {
                 try
                 {
-                    TempData[TempDataKeys.FILE_NAME] = processFile(model, photoFile);
+                    ICryptor cryptor = _algorithmFactory.GetInstance(model.CryptType);
+                    IEmbeder embeder = _embederFactory.GetInstance(model.EmbedType);
+
+                    TempData[TempDataKeys.FILE_NAME] = FileProcessorHelper.EmbedDwm(cryptor, embeder, model.Message, model.CryptPassword, photoFile.InputStream, Path.GetFileName(photoFile.FileName));
                     TempData[TempDataKeys.CONTENT_TYPE] = photoFile.ContentType;
                 }
                 catch (Exception ex)
@@ -73,20 +76,51 @@ namespace StenoCryptor.Web.Controllers
                     return View(SharedController.ERROR);
                 }
 
-                return RedirectToAction(HomeController.RESULT);
+                return RedirectToAction(HomeController.EMBED_RESULT);
             }
 
             return View();
         }
 
         [HttpGet]
-        public ActionResult Extract()
+        public ActionResult Detect()
         {
             return View();
         }
 
+        [HttpPost]
+        public ActionResult Detect(HttpPostedFileBase photoFile)
+        {
+            if (photoFile == null || photoFile.InputStream.Length == 0)
+                ModelState.AddModelError("photoFile", Localization.Views.Home.ErrPostFileIsNullOrEmpty);
+
+            if (ModelState.IsValid)
+            {
+                IDetector detector = _detectorFactory.GetInstance();
+                TempData[TempDataKeys.DETECT_RESULT] = FileProcessorHelper.DetectDwm(detector, photoFile.InputStream);
+
+                return RedirectToAction(DETECT_RESULT);
+            }
+
+            return View();
+        }
+
         [HttpGet]
-        public ActionResult Detect()
+        public ActionResult DetectResult()
+        {
+            if (TempData[TempDataKeys.DETECT_RESULT] == null)
+            {
+                TempData[TempDataKeys.ERROR] = Localization.Views.Home.AccessError;
+                return View(SharedController.ERROR);
+            }
+
+            ViewBag.Detected = TempData[TempDataKeys.DETECT_RESULT];
+
+            return View();
+        }
+
+        [HttpGet]
+        public ActionResult Extract()
         {
             return View();
         }
@@ -108,25 +142,6 @@ namespace StenoCryptor.Web.Controllers
         }
 
         #endregion Actions
-
-        #region Private Logics
-
-        private string processFile(Models.DwmEmbedModel model, HttpPostedFileBase photoFile)
-        {
-            ICryptor cryptor = _algorithmFactory.GetInstance(model.CryptType);
-            IEmbeder embeder = _embederFactory.GetInstance(model.EmbedType);
-            Container container = new Container(photoFile.InputStream);
-
-            if (!cryptor.ValidateKey(model.CryptPassword))
-                throw new ArgumentException(Localization.Views.Shared.WrongKey);
-
-            Stream cryptedMessage = cryptor.Encrypt(StreamHelper.StringToStream(model.Message), cryptor.ParseKey(model.CryptPassword));
-            embeder.Embed(container, cryptedMessage);
-         
-            return FileHelper.SaveFile(container.Data, Path.GetFileName(photoFile.FileName));
-        }
-
-        #endregion Private Logics
 
         #region Fields
 

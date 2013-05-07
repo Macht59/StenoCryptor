@@ -1,7 +1,28 @@
-﻿@model StenoCryptor.Web.Models.DwmDetectModel
-
-@{
+﻿@{
     ViewBag.Title = StenoCryptor.Web.Localization.Views.Home.DetectDwm;
 }
 
 <h2>@ViewBag.Title</h2>
+
+@using (Html.BeginForm(HomeController.DETECT, HomeController.CONTROLLER, FormMethod.Post, new { enctype = "multipart/form-data" }))
+{
+    <div class="row-container">
+        <div class="row clear-fix">
+            <div class="row-label">
+                @Html.Label("photoFile", StenoCryptor.Web.Localization.Models.DwmEmbedModel.Container)
+            </div>
+            <div class="row-content">
+                <input type="file" name="photoFile" id="photoFile" data-val-required="*" data-val="true" />
+            </div>
+        </div>
+        <div class="row clear-fix">
+            @Html.ValidationSummary(false)
+        </div>
+        <div class="row clear-fix">
+            <div class="row-label hidden-fix">.</div>
+            <div class="row-content">
+                <input type="submit" value="@StenoCryptor.Web.Localization.Views.Home.Go" class="submit-button" />
+            </div>
+        </div>
+    </div>
+}

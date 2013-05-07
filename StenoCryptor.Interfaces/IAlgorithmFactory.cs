@@ -1,5 +1,4 @@
-﻿using StenoCryptor.Commons;
-using StenoCryptor.Commons.Enums;
+﻿using StenoCryptor.Commons.Enums;
 
 namespace StenoCryptor.Interfaces
 {

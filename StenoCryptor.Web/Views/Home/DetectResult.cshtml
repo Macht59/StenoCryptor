@@ -1,0 +1,14 @@
+﻿@{
+    ViewBag.Title = StenoCryptor.Web.Localization.Views.Home.DetectResult;
+}
+
+<h2>@ViewBag.Title</h2>
+
+@if (ViewBag.Detected)
+{
+    <p>@StenoCryptor.Web.Localization.Views.Home.DwmDetected</p>
+}
+else
+{
+    <p>@StenoCryptor.Web.Localization.Views.Home.DwmNotDetected</p>
+}

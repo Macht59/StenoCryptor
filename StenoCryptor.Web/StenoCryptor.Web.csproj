@@ -173,6 +173,8 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Helpers\FileProcessorHelper.cs" />
+    <Compile Include="Helpers\StreamHelper.cs" />
     <Compile Include="Localization\Models\DwmEmbedModel.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -303,6 +305,7 @@
     <Content Include="Views\Home\Extract.cshtml" />
     <Content Include="Views\Home\Detect.cshtml" />
     <Content Include="Views\Home\EmbedResult.cshtml" />
+    <Content Include="Views\Home\DetectResult.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\StenoCryptor.Commons\StenoCryptor.Commons.csproj">

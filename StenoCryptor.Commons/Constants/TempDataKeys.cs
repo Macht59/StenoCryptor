@@ -8,5 +8,7 @@ namespace StenoCryptor.Commons.Constants
         public const string CONTENT_TYPE = "contentType";
 
         public const string ERROR = "errorMessage";
+
+        public const string DETECT_RESULT = "dwmDetected";
     }
 }
