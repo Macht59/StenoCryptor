@@ -1,5 +1,6 @@
 ﻿using StenoCryptor.Commons;
 using StenoCryptor.Interfaces;
+using System.IO;
 
 namespace StenoCryptor.Engyne.CryptAlgorithms
 {
@@ -415,12 +416,12 @@ namespace StenoCryptor.Engyne.CryptAlgorithms
 
 
 
-        public Container Encrypt(Container container, Key key)
+        public void Encrypt(Stream message, Key key)
         {
             throw new System.NotImplementedException();
         }
 
-        public Container Decrypt(Container container, Key key)
+        public void Decrypt(Stream message, Key key)
         {
             throw new System.NotImplementedException();
         }

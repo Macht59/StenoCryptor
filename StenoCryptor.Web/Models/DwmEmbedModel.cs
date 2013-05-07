@@ -1,6 +1,5 @@
-﻿using StenoCryptor.Commons;
+﻿using StenoCryptor.Commons.Enums;
 using System.ComponentModel.DataAnnotations;
-using System.IO;
 
 namespace StenoCryptor.Web.Models
 {
@@ -12,5 +11,7 @@ namespace StenoCryptor.Web.Models
         public EmbedType EmbedType { get; set; }
 
         public CryptType CryptType { get; set; }
+
+        public string CtypsPassword { get; set; }
     }
 }

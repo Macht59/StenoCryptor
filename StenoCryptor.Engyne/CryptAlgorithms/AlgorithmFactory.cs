@@ -1,16 +1,12 @@
-﻿using StenoCryptor.Commons;
+﻿using StenoCryptor.Commons.Enums;
 using StenoCryptor.Interfaces;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace StenoCryptor.Engyne.CryptAlgorithms
 {
-    public static class AlgorithmFactory
+    public class AlgorithmFactory : IAlgorithmFactory
     {
-        public static ICryptor GetInstance(CryptType cryptType)
+        public ICryptor GetInstance(CryptType cryptType)
         {
             switch (cryptType)
             {

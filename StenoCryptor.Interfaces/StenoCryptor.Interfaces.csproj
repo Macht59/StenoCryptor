@@ -39,8 +39,12 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="IAlgorithmFactory.cs" />
     <Compile Include="ICryptor.cs" />
     <Compile Include="IDetector.cs" />
+    <Compile Include="IDetectorFactory.cs" />
+    <Compile Include="IEmbeder.cs" />
+    <Compile Include="IEmbederFactory.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

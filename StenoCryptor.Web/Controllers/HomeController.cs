@@ -1,8 +1,10 @@
-﻿using StenoCryptor.Commons;
+﻿using Microsoft.Practices.Unity;
+using StenoCryptor.Commons;
+using StenoCryptor.Commons.Constants;
+using StenoCryptor.Commons.Helpers;
+using StenoCryptor.Interfaces;
 using System;
-using System.Collections.Generic;
 using System.IO;
-using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 
@@ -26,6 +28,17 @@ namespace StenoCryptor.Web.Controllers
 
         #endregion Constants
 
+        #region Constructors
+
+        public HomeController(IAlgorithmFactory algorithmFactory, IEmbederFactory embederFactory, IDetectorFactory detectorFactory)
+        {
+            _algorithmFactory = algorithmFactory;
+            _embederFactory = embederFactory;
+            _detectorFactory = detectorFactory;
+        }
+
+        #endregion Constructors
+
         #region Actions
 
         [HttpGet]
@@ -48,10 +61,18 @@ namespace StenoCryptor.Web.Controllers
 
             if (ModelState.IsValid)
             {
+                try
+                {
+                    processFile(model, photoFile);
+                }
+                catch (Exception ex)
+                {
+                    TempData[TempDataKeys.ERROR] = ex.Message;
+                    return View(SharedController.ERROR);
+                }
+
                 TempData[TempDataKeys.FILE_NAME] = FileHelper.SaveFile(photoFile.InputStream, Path.GetFileName(photoFile.FileName));
                 TempData[TempDataKeys.CONTENT_TYPE] = photoFile.ContentType;
-                
-                // process image
 
                 return RedirectToAction(HomeController.RESULT);
             }
@@ -80,13 +101,36 @@ namespace StenoCryptor.Web.Controllers
                 return View(SharedController.ERROR);
             }
 
-            return View(new Models.File() 
-            { 
-                FileName = (string)TempData[TempDataKeys.FILE_NAME], 
-                ContentType = (string)TempData[TempDataKeys.CONTENT_TYPE] 
+            return View(new Models.File()
+            {
+                FileName = (string)TempData[TempDataKeys.FILE_NAME],
+                ContentType = (string)TempData[TempDataKeys.CONTENT_TYPE]
             });
         }
 
         #endregion Actions
+
+        #region Private Logics
+
+        private void processFile(Models.DwmEmbedModel model, HttpPostedFileBase photoFile)
+        {
+            ICryptor cryptor = _algorithmFactory.GetInstance(model.CryptType);
+            Container container = new Container() { Data = photoFile.InputStream };
+
+            cryptor.Encrypt(container,
+                new Key() { Value = new byte[] { 1, 2, 3, 4, 5, 6, 7, 8 } });
+
+
+        }
+
+        #endregion Private Logics
+
+        #region Fields
+
+        private IAlgorithmFactory _algorithmFactory;
+        private IEmbederFactory _embederFactory;
+        private IDetectorFactory _detectorFactory;
+
+        #endregion Fields
     }
 }

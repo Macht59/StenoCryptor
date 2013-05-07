@@ -43,6 +43,10 @@
     <Compile Include="CryptAlgorithms\AlgorithmFactory.cs" />
     <Compile Include="CryptAlgorithms\DESCryptor.cs" />
     <Compile Include="CryptAlgorithms\ThreeDESCryptor.cs" />
+    <Compile Include="Detectors\DetectorFactory.cs" />
+    <Compile Include="Detectors\MockDetector.cs" />
+    <Compile Include="Embeders\EmbederFactory.cs" />
+    <Compile Include="Embeders\MockEmbeder.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -55,10 +59,7 @@
       <Name>StenoCryptor.Interfaces</Name>
     </ProjectReference>
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Detectors\" />
-    <Folder Include="Embeders\" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

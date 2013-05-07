@@ -39,15 +39,16 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Constants.cs" />
+    <Compile Include="Constants\Constants.cs" />
     <Compile Include="Container.cs" />
-    <Compile Include="CryptType.cs" />
-    <Compile Include="EmbedType.cs" />
-    <Compile Include="FileHelper.cs" />
+    <Compile Include="Enums\CryptType.cs" />
+    <Compile Include="Enums\EmbedType.cs" />
+    <Compile Include="Helpers\FileHelper.cs" />
     <Compile Include="Key.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="TempDataKeys.cs" />
+    <Compile Include="Constants\TempDataKeys.cs" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

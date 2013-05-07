@@ -8,10 +8,10 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace StenoCryptor.Web.Localization.Models {
-    using System;
-    
-    
+namespace StenoCryptor.Web.Localization.Models
+{
+
+
     /// <summary>
     ///   A strongly-typed resource class, for looking up localized strings, etc.
     /// </summary>

@@ -11,7 +11,7 @@ namespace StenoCryptor.Engyne.CryptAlgorithms
 
         public delegate ulong CryptMethod3Key(ulong value, ulong[] KeyList1, ulong[] KeyList2, ulong[] KeyList3, ulong IV, bool FlipKey);
 
-        class Const
+        private class Const
         {
             static public readonly byte[] IPstart =  {   
                                             57,	49,	41,	33,	25,	17,	9,	1,
@@ -332,16 +332,8 @@ namespace StenoCryptor.Engyne.CryptAlgorithms
                 {
                     ProcessSelectedPart(Const.FileBufferSize, 0, fsRead.Length - fsRead.Length % Const.FileBufferSize, fsRead, fsWrite, Algorythm, KeyList1, KeyList2, KeyList3, IV, FlipKey);
                 }
-                else
-                {
-                    EnCryptLastPart(Const.BlockSizeForFile, 0, fsRead, fsWrite, Algorythm, KeyList1, KeyList2, KeyList3, IV, FlipKey);
-                    fsRead.Dispose();
-                    fsWrite.Dispose();
-                    return;
-                }
+               
                 EnCryptLastPart(Const.BlockSizeForFile, fsRead.Length - fsRead.Length % Const.FileBufferSize, fsRead, fsWrite, Algorythm, KeyList1, KeyList2, KeyList3, IV, FlipKey);
-                fsRead.Dispose();
-                fsWrite.Dispose();
             }
             public void DeCryptFile(Stream fsRead, Stream fsWrite, CryptMethod3Key Algorythm, ulong[] KeyList1, ulong[] KeyList2, ulong[] KeyList3, ulong IV, bool FlipKey)
             {
@@ -349,16 +341,8 @@ namespace StenoCryptor.Engyne.CryptAlgorithms
                 {
                     ProcessSelectedPart(Const.FileBufferSize, 0, fsRead.Length - fsRead.Length % Const.FileBufferSize, fsRead, fsWrite, Algorythm, KeyList1, KeyList2, KeyList3, IV, FlipKey);
                 }
-                else
-                {
-                    DeCryptLastPart(Const.BlockSizeForFile, 0, fsRead, fsWrite, Algorythm, KeyList1, KeyList2, KeyList3, IV, FlipKey);
-                    fsRead.Dispose();
-                    fsWrite.Dispose();
-                    return;
-                }
-                DeCryptLastPart(Const.BlockSizeForFile, fsRead.Length - fsRead.Length % Const.FileBufferSize, fsRead, fsWrite, Algorythm, KeyList1, KeyList2, KeyList3, IV, FlipKey);
-                fsRead.Dispose();
-                fsWrite.Dispose();
+                    
+                DeCryptLastPart(Const.BlockSizeForFile, 0, fsRead, fsWrite, Algorythm, KeyList1, KeyList2, KeyList3, IV, FlipKey);
             }
             private void ProcessSelectedPart(int BufferSize, long Begin, long End, Stream fsRead, Stream fsWrite, CryptMethod3Key Algorythm, ulong[] KeyList1, ulong[] KeyList2, ulong[] KeyList3, ulong IV, bool FlipKey)
             {
@@ -711,27 +695,27 @@ namespace StenoCryptor.Engyne.CryptAlgorithms
 
         #region ICryptor Implementation
 
-        public Container Encrypt(Container container, Key key)
+        public void Encrypt(Stream message, Key key)
         {
             DES DESkey1 = new DES();
             FileProcessing fp = new FileProcessing();
             MemoryStream ms = new MemoryStream();
             
-            fp.EnCryptFile(container.Data, ms, cm1k, DESkey1.KeyList, null, null, 0, false);
+            fp.EnCryptFile(message, ms, cm1k, DESkey1.KeyList, null, null, 0, false);
 
-            return new Container() { Data = ms };
+            message = ms;
         }
 
 
-        public Container Decrypt(Container container, Key key)
+        public void Decrypt(Stream message, Key key)
         {
             DES DESkey1 = new DES();
             FileProcessing fp = new FileProcessing();
             MemoryStream ms = new MemoryStream(); 
 
-            fp.DeCryptFile(container.Data, ms, cm1k, DESkey1.KeyList, null, null, 0, true);
+            fp.DeCryptFile(message, ms, cm1k, DESkey1.KeyList, null, null, 0, true);
 
-            return new Container() { Data = ms };
+            message = ms;
         }
 
         #endregion ICryptor Implementation

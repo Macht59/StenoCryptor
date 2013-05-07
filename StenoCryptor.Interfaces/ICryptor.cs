@@ -1,11 +1,12 @@
 ﻿using StenoCryptor.Commons;
+using System.IO;
 
 namespace StenoCryptor.Interfaces
 {
     public interface ICryptor
     {
-        Container Encrypt(Container container, Key key);
+        void Encrypt(Stream message, Key key);
 
-        Container Decrypt(Container container, Key key);
+        void Decrypt(Stream message, Key key);
     }
 }
