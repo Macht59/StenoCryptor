@@ -3,10 +3,10 @@ using System.IO;
 
 namespace StenoCryptor.Interfaces
 {
-    public interface ICryptor
+    public interface ICryptor: IKeyAware
     {
-        void Encrypt(Stream message, Key key);
+        Stream Encrypt(Stream message, Key key);
 
-        void Decrypt(Stream message, Key key);
+        Stream Decrypt(Stream message, Key key);
     }
 }

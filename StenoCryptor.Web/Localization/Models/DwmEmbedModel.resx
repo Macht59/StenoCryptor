@@ -123,6 +123,9 @@
   <data name="CryptingType" xml:space="preserve">
     <value>Crypting Type:</value>
   </data>
+  <data name="CryptPassword" xml:space="preserve">
+    <value>Password:</value>
+  </data>
   <data name="EmbedingType" xml:space="preserve">
     <value>Embeding Type:</value>
   </data>
@@ -131,5 +134,8 @@
   </data>
   <data name="Message" xml:space="preserve">
     <value>Message:</value>
+  </data>
+  <data name="ErrPasswordRequired" xml:space="preserve">
+    <value>Password is required</value>
   </data>
 </root>

@@ -1,6 +1,7 @@
 ﻿using StenoCryptor.Commons;
 using StenoCryptor.Interfaces;
 using System;
+using System.Globalization;
 using System.IO;
 
 namespace StenoCryptor.Engyne.CryptAlgorithms
@@ -695,7 +696,7 @@ namespace StenoCryptor.Engyne.CryptAlgorithms
 
         #region ICryptor Implementation
 
-        public void Encrypt(Stream message, Key key)
+        public Stream Encrypt(Stream message, Key key)
         {
             DES DESkey1 = new DES();
             FileProcessing fp = new FileProcessing();
@@ -703,11 +704,11 @@ namespace StenoCryptor.Engyne.CryptAlgorithms
             
             fp.EnCryptFile(message, ms, cm1k, DESkey1.KeyList, null, null, 0, false);
 
-            message = ms;
+            return ms;
         }
 
 
-        public void Decrypt(Stream message, Key key)
+        public Stream Decrypt(Stream message, Key key)
         {
             DES DESkey1 = new DES();
             FileProcessing fp = new FileProcessing();
@@ -715,7 +716,35 @@ namespace StenoCryptor.Engyne.CryptAlgorithms
 
             fp.DeCryptFile(message, ms, cm1k, DESkey1.KeyList, null, null, 0, true);
 
-            message = ms;
+            return ms;
+        }
+
+        public bool ValidateKey(string stringKey)
+        {
+            byte result;
+
+            if (string.IsNullOrEmpty(stringKey) && stringKey.Length > 7)
+                return false;
+
+            foreach (char item in stringKey)
+            {
+                if (!byte.TryParse(item.ToString(), NumberStyles.HexNumber, null, out result))
+                    return false;
+            }
+
+            return true;
+        }
+
+        public Key ParseKey(string stringKey)
+        {
+            byte[] bytetKey = new byte[stringKey.Length];
+
+            for (int i = 0; i < stringKey.Length; i++)
+            {
+                bytetKey[i] = byte.Parse(stringKey[i].ToString(), NumberStyles.HexNumber);
+            }
+
+            return new Key() { Value = bytetKey };
         }
 
         #endregion ICryptor Implementation

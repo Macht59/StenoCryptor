@@ -22,7 +22,7 @@
                 @Html.LabelFor(m => m.EmbedType, StenoCryptor.Web.Localization.Models.DwmEmbedModel.EmbedingType)
             </div>
             <div class="row-content">
-                @Html.DropDownListFor(m => m.EmbedType, new SelectList(Enum.GetValues(typeof(EmbedType))))
+                @Html.DropDownListFor(m => m.EmbedType, new SelectList(Enum.GetValues(typeof(StenoCryptor.Commons.Enums.EmbedType))))
             </div>
         </div>
         <div class="row clear-fix">
@@ -30,7 +30,15 @@
                 @Html.LabelFor(m => m.CryptType, StenoCryptor.Web.Localization.Models.DwmEmbedModel.CryptingType)
             </div>
             <div class="row-content">
-                @Html.DropDownListFor(m => m.CryptType, new SelectList(Enum.GetValues(typeof(CryptType))))
+                @Html.DropDownListFor(m => m.CryptType, new SelectList(Enum.GetValues(typeof(StenoCryptor.Commons.Enums.CryptType))))
+            </div>
+        </div>
+        <div class="row clear-fix">
+            <div class="row-label">
+                @Html.LabelFor(m => m.CryptPassword, StenoCryptor.Web.Localization.Models.DwmEmbedModel.CryptPassword)
+            </div>
+            <div class="row-content">
+                @Html.TextBoxFor(m => m.CryptPassword)
             </div>
         </div>
         <div class="row clear-fix">

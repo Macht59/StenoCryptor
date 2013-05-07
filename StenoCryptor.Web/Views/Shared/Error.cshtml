@@ -14,9 +14,9 @@
     </h2>
 
     @{
-        if (TempData.Keys.Contains(TempDataKeys.ERROR))
+        if (TempData.Keys.Contains(StenoCryptor.Commons.Constants.TempDataKeys.ERROR))
         {
-        <p>@TempData[TempDataKeys.ERROR].ToString()</p>
+        <p>@TempData[StenoCryptor.Commons.Constants.TempDataKeys.ERROR].ToString()</p>
         }
     }
 

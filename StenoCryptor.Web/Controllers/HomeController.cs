@@ -1,6 +1,7 @@
 ﻿using Microsoft.Practices.Unity;
 using StenoCryptor.Commons;
 using StenoCryptor.Commons.Constants;
+using StenoCryptor.Commons.Enums;
 using StenoCryptor.Commons.Helpers;
 using StenoCryptor.Interfaces;
 using System;
@@ -63,16 +64,14 @@ namespace StenoCryptor.Web.Controllers
             {
                 try
                 {
-                    processFile(model, photoFile);
+                    TempData[TempDataKeys.FILE_NAME] = processFile(model, photoFile);
+                    TempData[TempDataKeys.CONTENT_TYPE] = photoFile.ContentType;
                 }
                 catch (Exception ex)
                 {
                     TempData[TempDataKeys.ERROR] = ex.Message;
                     return View(SharedController.ERROR);
                 }
-
-                TempData[TempDataKeys.FILE_NAME] = FileHelper.SaveFile(photoFile.InputStream, Path.GetFileName(photoFile.FileName));
-                TempData[TempDataKeys.CONTENT_TYPE] = photoFile.ContentType;
 
                 return RedirectToAction(HomeController.RESULT);
             }
@@ -112,15 +111,19 @@ namespace StenoCryptor.Web.Controllers
 
         #region Private Logics
 
-        private void processFile(Models.DwmEmbedModel model, HttpPostedFileBase photoFile)
+        private string processFile(Models.DwmEmbedModel model, HttpPostedFileBase photoFile)
         {
             ICryptor cryptor = _algorithmFactory.GetInstance(model.CryptType);
-            Container container = new Container() { Data = photoFile.InputStream };
+            IEmbeder embeder = _embederFactory.GetInstance(model.EmbedType);
+            Container container = new Container(photoFile.InputStream);
 
-            cryptor.Encrypt(container,
-                new Key() { Value = new byte[] { 1, 2, 3, 4, 5, 6, 7, 8 } });
+            if (!cryptor.ValidateKey(model.CryptPassword))
+                throw new ArgumentException(Localization.Views.Shared.WrongKey);
 
-
+            Stream cryptedMessage = cryptor.Encrypt(StreamHelper.StringToStream(model.Message), cryptor.ParseKey(model.CryptPassword));
+            embeder.Embed(container, cryptedMessage);
+         
+            return FileHelper.SaveFile(container.Data, Path.GetFileName(photoFile.FileName));
         }
 
         #endregion Private Logics

@@ -45,6 +45,7 @@
     <Compile Include="IDetectorFactory.cs" />
     <Compile Include="IEmbeder.cs" />
     <Compile Include="IEmbederFactory.cs" />
+    <Compile Include="IKeyAware.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

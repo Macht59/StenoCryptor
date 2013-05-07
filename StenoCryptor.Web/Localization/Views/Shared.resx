@@ -129,4 +129,7 @@
   <data name="FileIsNotSelected" xml:space="preserve">
     <value>File is not selected</value>
   </data>
+  <data name="WrongKey" xml:space="preserve">
+    <value>Crypt key is not valid</value>
+  </data>
 </root>

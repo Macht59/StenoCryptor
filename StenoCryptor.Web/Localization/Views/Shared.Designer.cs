@@ -8,10 +8,10 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace StenoCryptor.Web.Localization.Views
-{
-
-
+namespace StenoCryptor.Web.Localization.Views {
+    using System;
+    
+    
     /// <summary>
     ///   A strongly-typed resource class, for looking up localized strings, etc.
     /// </summary>
@@ -93,6 +93,15 @@ namespace StenoCryptor.Web.Localization.Views
         public static string FileIsNotSelected {
             get {
                 return ResourceManager.GetString("FileIsNotSelected", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Crypt key is not valid.
+        /// </summary>
+        public static string WrongKey {
+            get {
+                return ResourceManager.GetString("WrongKey", resourceCulture);
             }
         }
     }

@@ -8,10 +8,10 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace StenoCryptor.Web.Localization.Models
-{
-
-
+namespace StenoCryptor.Web.Localization.Models {
+    using System;
+    
+    
     /// <summary>
     ///   A strongly-typed resource class, for looking up localized strings, etc.
     /// </summary>
@@ -79,6 +79,15 @@ namespace StenoCryptor.Web.Localization.Models
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Password:.
+        /// </summary>
+        public static string CryptPassword {
+            get {
+                return ResourceManager.GetString("CryptPassword", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Embeding Type:.
         /// </summary>
         public static string EmbedingType {
@@ -93,6 +102,15 @@ namespace StenoCryptor.Web.Localization.Models
         public static string ErrContainerRequired {
             get {
                 return ResourceManager.GetString("ErrContainerRequired", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Password is required.
+        /// </summary>
+        public static string ErrPasswordRequired {
+            get {
+                return ResourceManager.GetString("ErrPasswordRequired", resourceCulture);
             }
         }
         

@@ -416,12 +416,22 @@ namespace StenoCryptor.Engyne.CryptAlgorithms
 
 
 
-        public void Encrypt(Stream message, Key key)
+        public Stream Encrypt(Stream message, Key key)
         {
             throw new System.NotImplementedException();
         }
 
-        public void Decrypt(Stream message, Key key)
+        public Stream Decrypt(Stream message, Key key)
+        {
+            throw new System.NotImplementedException();
+        }
+
+        public bool ValidateKey(string key)
+        {
+            throw new System.NotImplementedException();
+        }
+
+        public Key ParseKey(string key)
         {
             throw new System.NotImplementedException();
         }
