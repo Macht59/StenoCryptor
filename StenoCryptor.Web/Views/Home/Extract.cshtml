@@ -1,7 +1,12 @@
-﻿@model StenoCryptor.Web.Models.DwmExtractModel
+﻿@using StenoCryptor.Web.Controllers
 
 @{
-    ViewBag.Title = Home.ExtractDwm;
+    ViewBag.Title = StenoCryptor.Web.Localization.Views.Home.ExtractDwm;
 }
 
 <h2>@ViewBag.Title</h2>
+
+@using (Html.BeginForm(HomeController.DETECT, HomeController.CONTROLLER, FormMethod.Post, new { enctype = "multipart/form-data" }))
+{
+    
+}

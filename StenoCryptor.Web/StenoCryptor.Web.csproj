@@ -188,10 +188,8 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Shared.resx</DependentUpon>
     </Compile>
-    <Compile Include="Models\DwmDetectModel.cs" />
     <Compile Include="Models\DwmEmbedModel.cs" />
-    <Compile Include="Models\DwmExtractModel.cs" />
-    <Compile Include="Models\Model.cs" />
+    <Compile Include="Models\FileModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -304,7 +302,7 @@
     <Content Include="Views\Home\Embed.cshtml" />
     <Content Include="Views\Home\Extract.cshtml" />
     <Content Include="Views\Home\Detect.cshtml" />
-    <Content Include="Views\Home\Result.cshtml" />
+    <Content Include="Views\Home\EmbedResult.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\StenoCryptor.Commons\StenoCryptor.Commons.csproj">

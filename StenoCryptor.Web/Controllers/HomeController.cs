@@ -25,7 +25,7 @@ namespace StenoCryptor.Web.Controllers
 
         public const string DETECT = "Detect";
 
-        public const string RESULT = "RESULT";
+        public const string RESULT = "EmbedResult";
 
         #endregion Constants
 
@@ -92,7 +92,7 @@ namespace StenoCryptor.Web.Controllers
         }
 
         [HttpGet]
-        public ActionResult Result()
+        public ActionResult EmbedResult()
         {
             if (!TempData.Keys.Contains(TempDataKeys.FILE_NAME))
             {
@@ -100,7 +100,7 @@ namespace StenoCryptor.Web.Controllers
                 return View(SharedController.ERROR);
             }
 
-            return View(new Models.File()
+            return View(new Models.FileModel()
             {
                 FileName = (string)TempData[TempDataKeys.FILE_NAME],
                 ContentType = (string)TempData[TempDataKeys.CONTENT_TYPE]
