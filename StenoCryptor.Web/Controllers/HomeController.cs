@@ -141,6 +141,28 @@ namespace StenoCryptor.Web.Controllers
             return View();
         }
 
+        [HttpPost]
+        public ActionResult Extract(HttpPostedFileBase photoFile)
+        {
+            if (photoFile == null || photoFile.InputStream.Length == 0)
+                ModelState.AddModelError("photoFile", Localization.Views.Home.ErrPostFileIsNullOrEmpty);
+
+            if (ModelState.IsValid)
+            {
+                TempData[TempDataKeys.DETECT_RESULT] = FileProcessorHelper.ExtractDwm(photoFile.InputStream);
+
+                return RedirectToAction(DETECT_RESULT);
+            }
+
+            return View();
+        }
+
+        [HttpGet]
+        public ActionResult ExtractResult()
+        {
+            return View();
+        }
+
         #endregion Actions
 
         #region Fields

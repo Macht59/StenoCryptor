@@ -44,5 +44,10 @@ namespace StenoCryptor.Web.Helpers
             Container container = new Container(inputStream);
             return detector.Detect(container);
         }
+
+        public static Stream ExtractDwm(Stream stream)
+        {
+            return stream;
+        }
     }
 }
