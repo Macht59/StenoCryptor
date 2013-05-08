@@ -1,5 +1,6 @@
 ﻿using StenoCryptor.Commons;
 using StenoCryptor.Interfaces;
+using StenoCryptor.Web.Models;
 using System;
 using System.IO;
 
@@ -45,9 +46,10 @@ namespace StenoCryptor.Web.Helpers
             return detector.Detect(container);
         }
 
-        public static Stream ExtractDwm(Stream stream)
+        public static void ExtractDwm(Stream stream, out DwmModel model, out Stream outStream)
         {
-            return stream;
+            model = new DwmModel();
+            outStream = stream;
         }
     }
 }

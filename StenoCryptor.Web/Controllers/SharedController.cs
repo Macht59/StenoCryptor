@@ -1,4 +1,5 @@
-﻿using System.Web.Mvc;
+﻿using System.IO;
+using System.Web.Mvc;
 
 namespace StenoCryptor.Web.Controllers
 {
@@ -19,7 +20,7 @@ namespace StenoCryptor.Web.Controllers
         [HttpGet]
         public FileResult Download(string fileName, string contentType)
         {
-            return File(fileName, contentType);
+            return File(fileName, contentType, Path.GetFileName(fileName));
         }
 
         #endregion Actions

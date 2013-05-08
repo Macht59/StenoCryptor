@@ -151,6 +151,15 @@ namespace StenoCryptor.Web.Localization.Views {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Extract result.
+        /// </summary>
+        public static string ExtractResult {
+            get {
+                return ResourceManager.GetString("ExtractResult", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to File {0} is sucessfuly processed..
         /// </summary>
         public static string FileProcessed {
@@ -174,6 +183,15 @@ namespace StenoCryptor.Web.Localization.Views {
         public static string Home_ {
             get {
                 return ResourceManager.GetString("Home_", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Message is extracted from the container..
+        /// </summary>
+        public static string MessageExtracted {
+            get {
+                return ResourceManager.GetString("MessageExtracted", resourceCulture);
             }
         }
         

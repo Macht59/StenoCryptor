@@ -147,6 +147,9 @@
   <data name="ExtractDwm" xml:space="preserve">
     <value>Extract DWM</value>
   </data>
+  <data name="ExtractResult" xml:space="preserve">
+    <value>Extract result</value>
+  </data>
   <data name="FileProcessed" xml:space="preserve">
     <value>File {0} is sucessfuly processed.</value>
   </data>
@@ -155,6 +158,9 @@
   </data>
   <data name="Home_" xml:space="preserve">
     <value>Home</value>
+  </data>
+  <data name="MessageExtracted" xml:space="preserve">
+    <value>Message is extracted from the container.</value>
   </data>
   <data name="Remains" xml:space="preserve">
     <value>Remains</value>

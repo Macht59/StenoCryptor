@@ -306,6 +306,7 @@
     <Content Include="Views\Home\Detect.cshtml" />
     <Content Include="Views\Home\EmbedResult.cshtml" />
     <Content Include="Views\Home\DetectResult.cshtml" />
+    <Content Include="Views\Home\ExtractResult.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\StenoCryptor.Commons\StenoCryptor.Commons.csproj">

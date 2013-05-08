@@ -10,5 +10,7 @@ namespace StenoCryptor.Commons.Constants
         public const string ERROR = "errorMessage";
 
         public const string DETECT_RESULT = "dwmDetected";
+
+        public const string EXTRACTED_MODEL = "dwmExtracedModel";
     }
 }

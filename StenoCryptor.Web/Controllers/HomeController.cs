@@ -2,6 +2,7 @@
 using StenoCryptor.Commons.Constants;
 using StenoCryptor.Interfaces;
 using StenoCryptor.Web.Helpers;
+using StenoCryptor.Web.Models;
 using System;
 using System.IO;
 using System.Web;
@@ -26,6 +27,8 @@ namespace StenoCryptor.Web.Controllers
         public const string EMBED_RESULT = "EmbedResult";
 
         public const string DETECT_RESULT = "DetectResult";
+
+        public const string EXTRACT_RESULT = "ExtractResult";
 
         #endregion Constants
 
@@ -149,9 +152,16 @@ namespace StenoCryptor.Web.Controllers
 
             if (ModelState.IsValid)
             {
-                TempData[TempDataKeys.DETECT_RESULT] = FileProcessorHelper.ExtractDwm(photoFile.InputStream);
+                Stream outStream;
+                DwmModel model;
 
-                return RedirectToAction(DETECT_RESULT);
+                FileProcessorHelper.ExtractDwm(photoFile.InputStream, out model, out outStream);
+
+                TempData[TempDataKeys.FILE_NAME] = StreamHelper.SaveFile(outStream, Path.GetFileName(photoFile.FileName));
+                TempData[TempDataKeys.CONTENT_TYPE] = photoFile.ContentType;
+                TempData[TempDataKeys.EXTRACTED_MODEL] = model;
+
+                return RedirectToAction(EXTRACT_RESULT);
             }
 
             return View();
@@ -160,7 +170,18 @@ namespace StenoCryptor.Web.Controllers
         [HttpGet]
         public ActionResult ExtractResult()
         {
-            return View();
+            if (TempData[TempDataKeys.FILE_NAME] == null ||
+                TempData[TempDataKeys.CONTENT_TYPE] == null ||
+                TempData[TempDataKeys.EXTRACTED_MODEL] == null)
+            {
+                TempData[TempDataKeys.ERROR] = Localization.Views.Home.AccessError;
+                return View(SharedController.ERROR);
+            }
+
+            ViewBag.FileName = TempData[TempDataKeys.FILE_NAME];
+            ViewBag.ContentType = TempData[TempDataKeys.CONTENT_TYPE];
+
+            return View(TempData[TempDataKeys.EXTRACTED_MODEL]);
         }
 
         #endregion Actions
