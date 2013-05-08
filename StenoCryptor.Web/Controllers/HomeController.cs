@@ -55,7 +55,7 @@ namespace StenoCryptor.Web.Controllers
         }
 
         [HttpPost]
-        public ActionResult Embed(Models.DwmEmbedModel model, HttpPostedFileBase photoFile)
+        public ActionResult Embed(Models.DwmModel model, HttpPostedFileBase photoFile)
         {
             if (photoFile == null)
                 ModelState.AddModelError("photoFile", Localization.Views.Shared.FileIsNotSelected);

@@ -3,7 +3,7 @@ using System.ComponentModel.DataAnnotations;
 
 namespace StenoCryptor.Web.Models
 {
-    public class DwmEmbedModel
+    public class DwmModel
     {
         [Required(ErrorMessageResourceType = typeof(Localization.Models.DwmEmbedModel), ErrorMessageResourceName = "ErrContainerRequired")]
         public string Message { get; set; }
