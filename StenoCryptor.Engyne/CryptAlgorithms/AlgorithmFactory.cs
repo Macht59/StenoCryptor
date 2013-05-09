@@ -13,7 +13,7 @@ namespace StenoCryptor.Engyne.CryptAlgorithms
                 case CryptType.DES:
                     return new DESCryptor();
                 case CryptType.ThreeDES:
-                    return new ThreeDESCryptor();
+                    return new TreepleDESCryptor();
                 case CryptType.AES:
                     return null;
                 default:

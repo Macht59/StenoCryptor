@@ -7,7 +7,15 @@ namespace StenoCryptor.Engyne.Embeders
     {
         public IEmbeder GetInstance(EmbedType embedType)
         {
-            return new MockEmbeder();
+            switch (embedType)
+            {
+                case EmbedType.Lsb:
+                    return new LsbEmbeder();
+                case EmbedType.None:
+                    return new MockEmbeder();
+                default:
+                    return new MockEmbeder();
+            }
         }
     }
 }

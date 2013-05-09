@@ -69,8 +69,9 @@ namespace StenoCryptor.Web.Controllers
                 {
                     ICryptor cryptor = _algorithmFactory.GetInstance(model.CryptType);
                     IEmbeder embeder = _embederFactory.GetInstance(model.EmbedType);
+                    Container container = new Container(photoFile.InputStream, photoFile.ContentType);
 
-                    TempData[TempDataKeys.FILE_NAME] = FileProcessorHelper.EmbedDwm(cryptor, embeder, model.Message, model.CryptPassword, photoFile.InputStream, Path.GetFileName(photoFile.FileName));
+                    TempData[TempDataKeys.FILE_NAME] = FileProcessorHelper.EmbedDwm(cryptor, embeder, model.Message, model.CryptPassword, container, Path.GetFileName(photoFile.FileName));
                     TempData[TempDataKeys.CONTENT_TYPE] = photoFile.ContentType;
                 }
                 catch (Exception ex)

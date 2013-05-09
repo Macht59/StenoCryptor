@@ -43,5 +43,14 @@ namespace StenoCryptor.Web.Helpers
                 return fs.Name;
             }
         }
+
+        public static byte[] StreamToBytesArray(Stream stream)
+        {
+            using (MemoryStream ms = new MemoryStream())
+            {
+                stream.CopyTo(ms);
+                return ms.ToArray();
+            }
+        }
     }
 }

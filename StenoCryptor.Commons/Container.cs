@@ -1,4 +1,5 @@
-﻿using System.IO;
+﻿using StenoCryptor.Commons.Enums;
+using System.IO;
 
 namespace StenoCryptor.Commons
 {
@@ -10,10 +11,19 @@ namespace StenoCryptor.Commons
         }
 
         public Container(Stream stream)
+            : this(stream, null)
         {
-            Data = stream;
+
         }
 
-        public Stream Data { get; set; }
+        public Container(Stream stream, string contentType)
+        {
+            InputStream = stream;
+            ContentType = contentType;
+        }
+
+        public Stream InputStream { get; set; }
+
+        public string ContentType { get; set; }
     }
 }

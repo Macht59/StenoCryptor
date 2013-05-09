@@ -5,6 +5,6 @@ namespace StenoCryptor.Interfaces
 {
     public interface IEmbeder
     {
-        void Embed(Container container, Stream message);
+        void Embed(Container container, byte[] message);
     }
 }

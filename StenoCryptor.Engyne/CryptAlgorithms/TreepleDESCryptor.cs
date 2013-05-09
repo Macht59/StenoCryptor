@@ -1,7 +1,7 @@
 ﻿
 namespace StenoCryptor.Engyne.CryptAlgorithms
 {
-    public class ThreeDESCryptor: DESCryptor
+    public class TreepleDESCryptor: DESCryptor
     {
     }
 }

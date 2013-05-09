@@ -18,20 +18,18 @@ namespace StenoCryptor.Web.Helpers
         /// <param name="embeder">Embeding algorithm.</param>
         /// <param name="message">Secret message.</param>
         /// <param name="password">Crypting password.</param>
-        /// <param name="inputStream">Container file stream.</param>
+        /// <param name="container">Container.</param>
         /// <param name="fileName">Container file name.</param>
         /// <returns>Saved file name at server.</returns>
-        public static string EmbedDwm(ICryptor cryptor, IEmbeder embeder, string message, string password, Stream inputStream, string fileName)
+        public static string EmbedDwm(ICryptor cryptor, IEmbeder embeder, string message, string password, Container container, string fileName)
         {
-            Container container = new Container(inputStream);
-
             if (!cryptor.ValidateKey(password))
                 throw new ArgumentException(Localization.Views.Shared.WrongKey);
 
             Stream cryptedMessage = cryptor.Encrypt(StreamHelper.StringToStream(message), cryptor.ParseKey(password));
-            embeder.Embed(container, cryptedMessage);
+            embeder.Embed(container, StreamHelper.StreamToBytesArray(cryptedMessage));
 
-            return StreamHelper.SaveFile(container.Data, fileName);
+            return StreamHelper.SaveFile(container.InputStream, fileName);
         }
 
         /// <summary>
