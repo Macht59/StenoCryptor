@@ -44,10 +44,9 @@ namespace StenoCryptor.Web.Helpers
             return detector.Detect(container);
         }
 
-        public static void ExtractDwm(Stream stream, out DwmModel model, out Stream outStream)
+        public static DwmModel ExtractDwm(Container container)
         {
-            model = new DwmModel();
-            outStream = stream;
+            return new DwmModel();
         }
     }
 }

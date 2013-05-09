@@ -3,7 +3,7 @@ namespace StenoCryptor.Commons.Enums
 {
     public enum EmbedType: byte
     {
-        Lsb,
-        None
+        None,
+        Lsb
     }
 }

@@ -28,13 +28,25 @@ namespace StenoCryptor.Engyne.Embeders
             {
                 for (int x = 0; x < bitmap.Width; x++)
                 {
+                    int number = (x + 1) * (y + 1);
+                    if (number > message.Length)
+                    {
+                        bitmap.Save(container.InputStream, ImageFormat.Bmp);
+                        return;
+                    }
+
                     Color pixel = bitmap.GetPixel(x, y);
-                    pixel = processPixel(x * y, pixel, message);
+                    pixel = processPixel(number, pixel, message);
                     bitmap.SetPixel(x, y, pixel);
                 }
             }
 
             bitmap.Save(container.InputStream, ImageFormat.Bmp);
+        }
+
+        public byte[] Extract(Container container)
+        {
+            throw new NotImplementedException();
         }
 
         #endregion

@@ -153,12 +153,10 @@ namespace StenoCryptor.Web.Controllers
 
             if (ModelState.IsValid)
             {
-                Stream outStream;
-                DwmModel model;
+                Container container = new Container(photoFile.InputStream, photoFile.ContentType);
+                DwmModel model = FileProcessorHelper.ExtractDwm(container);
 
-                FileProcessorHelper.ExtractDwm(photoFile.InputStream, out model, out outStream);
-
-                TempData[TempDataKeys.FILE_NAME] = StreamHelper.SaveFile(outStream, Path.GetFileName(photoFile.FileName));
+                TempData[TempDataKeys.FILE_NAME] = StreamHelper.SaveFile(container.InputStream, Path.GetFileName(photoFile.FileName));
                 TempData[TempDataKeys.CONTENT_TYPE] = photoFile.ContentType;
                 TempData[TempDataKeys.EXTRACTED_MODEL] = model;
 

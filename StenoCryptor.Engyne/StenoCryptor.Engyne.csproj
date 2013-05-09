@@ -43,6 +43,7 @@
     <Compile Include="CryptAlgorithms\AESCryptor.cs" />
     <Compile Include="CryptAlgorithms\AlgorithmFactory.cs" />
     <Compile Include="CryptAlgorithms\DESCryptor.cs" />
+    <Compile Include="CryptAlgorithms\MockCriptor.cs" />
     <Compile Include="CryptAlgorithms\TreepleDESCryptor.cs" />
     <Compile Include="Detectors\DetectorFactory.cs" />
     <Compile Include="Detectors\MockDetector.cs" />

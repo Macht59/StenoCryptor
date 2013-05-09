@@ -6,7 +6,12 @@ namespace StenoCryptor.Engyne.Embeders
     {
         public void Embed(Commons.Container container, byte[] message)
         {
-            
+        }
+
+
+        public byte[] Extract(Commons.Container container)
+        {
+            return new byte[0];
         }
     }
 }
