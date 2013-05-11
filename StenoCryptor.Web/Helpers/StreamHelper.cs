@@ -1,4 +1,5 @@
-﻿using System.IO;
+﻿using StenoCryptor.Commons.Constants;
+using System.IO;
 using System.Text;
 
 namespace StenoCryptor.Web.Helpers
@@ -9,20 +10,49 @@ namespace StenoCryptor.Web.Helpers
     public static class StreamHelper
     {
         /// <summary>
-        /// Converts string into stream.
+        /// Converts string into stream in default encoding.
         /// </summary>
         /// <param name="str">String to convert.</param>
         /// <returns>Stream with string in it.</returns>
         public static Stream StringToStream(string str)
         {
-            return StringToStream(str, Encoding.UTF8);
+            return StringToStream(str, Constants.DEFAULT_ENCODING);
         }
 
+        /// <summary>
+        /// Converts string into stream.
+        /// </summary>
+        /// <param name="str">String to convert.</param>
+        /// <param name="encoding">String encoding.</param>
+        /// <returns>Stream with string in it.</returns>
         public static Stream StringToStream(string str, Encoding encoding)
         {
             byte[] bytes = encoding.GetBytes(str);
 
             return new MemoryStream(bytes);
+        }
+
+        /// <summary>
+        /// Appends string to stream in default encoding.
+        /// </summary>
+        /// <param name="stream">Main stream.</param>
+        /// <param name="appendingString">String to be appended.</param>
+        /// <remarks>Used default encoding.</remarks>
+        public static void AppendToStream(Stream stream, string appendingString)
+        {
+            AppendToStream(stream, appendingString, Constants.DEFAULT_ENCODING);
+        }
+
+        /// <summary>
+        /// Appends string to stream in default encoding.
+        /// </summary>
+        /// <param name="stream">Main stream.</param>
+        /// <param name="appendingString">String to be appended.</param>
+        /// <param name="encoding">String encoding.</param>
+        public static void AppendToStream(Stream stream, string appendingString, Encoding encoding)
+        {
+            stream.Position = stream.Length;
+            stream.Write(encoding.GetBytes(appendingString), 0, encoding.GetByteCount(appendingString));
         }
 
         /// <summary>

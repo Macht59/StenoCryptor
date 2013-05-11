@@ -153,6 +153,9 @@
   <data name="FileProcessed" xml:space="preserve">
     <value>File {0} is sucessfuly processed.</value>
   </data>
+  <data name="GenerateKeys" xml:space="preserve">
+    <value>Generate keys</value>
+  </data>
   <data name="Go" xml:space="preserve">
     <value>Go</value>
   </data>

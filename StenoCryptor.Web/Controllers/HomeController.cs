@@ -30,6 +30,8 @@ namespace StenoCryptor.Web.Controllers
 
         public const string EXTRACT_RESULT = "ExtractResult";
 
+        public const string GENERATE = "Generate";
+
         #endregion Constants
 
         #region Constructors
@@ -48,6 +50,34 @@ namespace StenoCryptor.Web.Controllers
         [HttpGet]
         public ActionResult Index()
         {
+            return View();
+        }
+
+        [HttpGet]
+        public ActionResult Generate()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public ActionResult Generate(GenerateKeyModel model, HttpPostedFileBase photoFile)
+        {
+            if (photoFile == null)
+                ModelState.AddModelError("photoFile", Localization.Models.GenerateKeyModel.errMessageRequired);
+
+            ICryptor cryptor = _algorithmFactory.GetInstance(model.CryptType);
+            if (!cryptor.ValidateKey(model.Key))
+                ModelState.AddModelError("Key", Localization.Models.GenerateKeyModel.errCryptKeyNotValid);
+
+            if (ModelState.IsValid)
+            {
+                Key key = new Key();
+                key.MessageLength = photoFile.InputStream.Length;
+                key.Value = cryptor.ParseKey(model.Key);
+
+                return File(SerializeHelper.SerializeBinary(key), Constants.BINARY_CONTENT_TYPE, Constants.DEFAULT_KEY_NAME);
+            }
+
             return View();
         }
 
@@ -154,7 +184,7 @@ namespace StenoCryptor.Web.Controllers
             if (ModelState.IsValid)
             {
                 Container container = new Container(photoFile.InputStream, photoFile.ContentType);
-                DwmModel model = FileProcessorHelper.ExtractDwm(container);
+                DwmModel model = FileProcessorHelper.ExtractDwm(container, null);
 
                 TempData[TempDataKeys.FILE_NAME] = StreamHelper.SaveFile(container.InputStream, Path.GetFileName(photoFile.FileName));
                 TempData[TempDataKeys.CONTENT_TYPE] = photoFile.ContentType;

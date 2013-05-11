@@ -36,14 +36,6 @@ textarea {
     min-height: 75px;
 }
 
-.editor-label {
-    margin: 1em 0 0 0;
-}
-
-.editor-field {
-    margin: 0.5em 0 0 0;
-}
-
 
 /* Styles for validation helpers
 -----------------------------------------------------------*/
@@ -103,6 +95,7 @@ textarea {
 
 .row-container {
     width: 600px;
+    margin: 0 auto;
 }
 
 .row {
@@ -112,7 +105,7 @@ textarea {
 }
 
 .row-label {
-    width: 250px;
+    width: 210px;
     text-align: right;
     float:left;
     padding-right: 10px;

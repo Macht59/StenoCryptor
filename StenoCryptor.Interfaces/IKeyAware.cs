@@ -6,6 +6,6 @@ namespace StenoCryptor.Interfaces
     {
         bool ValidateKey(string key);
 
-        Key ParseKey(string key);
+        byte[] ParseKey(string key);
     }
 }

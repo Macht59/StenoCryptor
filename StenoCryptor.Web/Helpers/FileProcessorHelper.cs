@@ -1,4 +1,5 @@
 ﻿using StenoCryptor.Commons;
+using StenoCryptor.Commons.Constants;
 using StenoCryptor.Interfaces;
 using StenoCryptor.Web.Models;
 using System;
@@ -26,7 +27,10 @@ namespace StenoCryptor.Web.Helpers
             if (!cryptor.ValidateKey(password))
                 throw new ArgumentException(Localization.Views.Shared.WrongKey);
 
-            Stream cryptedMessage = cryptor.Encrypt(StreamHelper.StringToStream(message), cryptor.ParseKey(password));
+            int messageLength = Constants.DEFAULT_ENCODING.GetByteCount(message);
+            MemoryStream messageStream = new MemoryStream(BitConverter.GetBytes(messageLength));
+            StreamHelper.AppendToStream(messageStream, message);
+            Stream cryptedMessage = null;// cryptor.Encrypt(messageStream, cryptor.ParseKey(password));
             embeder.Embed(container, StreamHelper.StreamToBytesArray(cryptedMessage));
 
             return StreamHelper.SaveFile(container.InputStream, fileName);
@@ -44,8 +48,9 @@ namespace StenoCryptor.Web.Helpers
             return detector.Detect(container);
         }
 
-        public static DwmModel ExtractDwm(Container container)
+        public static DwmModel ExtractDwm(Container container, IEmbeder embeder)
         {
+            
             return new DwmModel();
         }
     }

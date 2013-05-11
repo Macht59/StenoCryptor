@@ -431,7 +431,8 @@ namespace StenoCryptor.Engyne.CryptAlgorithms
             throw new System.NotImplementedException();
         }
 
-        public Key ParseKey(string key)
+
+        public byte[] ParseKey(string key)
         {
             throw new System.NotImplementedException();
         }

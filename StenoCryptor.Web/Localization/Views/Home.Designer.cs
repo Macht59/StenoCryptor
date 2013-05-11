@@ -169,6 +169,15 @@ namespace StenoCryptor.Web.Localization.Views {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Generate keys.
+        /// </summary>
+        public static string GenerateKeys {
+            get {
+                return ResourceManager.GetString("GenerateKeys", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Go.
         /// </summary>
         public static string Go {

@@ -739,16 +739,16 @@ namespace StenoCryptor.Engyne.CryptAlgorithms
             return true;
         }
 
-        public Key ParseKey(string stringKey)
+        public byte[] ParseKey(string stringKey)
         {
-            byte[] bytetKey = new byte[stringKey.Length];
+            byte[] bytesKey = new byte[stringKey.Length];
 
             for (int i = 0; i < stringKey.Length; i++)
             {
-                bytetKey[i] = byte.Parse(stringKey[i].ToString(), NumberStyles.HexNumber);
+                bytesKey[i] = byte.Parse(stringKey[i].ToString(), NumberStyles.HexNumber);
             }
 
-            return new Key() { Value = bytetKey };
+            return bytesKey;
         }
 
         #endregion ICryptor Implementation

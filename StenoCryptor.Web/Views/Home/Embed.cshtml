@@ -8,7 +8,7 @@
 
 @using (Html.BeginForm(StenoCryptor.Web.Controllers.HomeController.EMBED, StenoCryptor.Web.Controllers.HomeController.CONTROLLER, FormMethod.Post, new { enctype = "multipart/form-data" }))
 {
-    <div class="row-container">
+    <section class="row-container">
         <div class="row clear-fix">
             <div class="row-label">
                 @Html.Label("photoFile", StenoCryptor.Web.Localization.Models.DwmEmbedModel.Container)
@@ -55,8 +55,8 @@
         <div class="row clear-fix">
             <div class="row-label hidden-fix">.</div>
             <div class="row-content">
-                <input type="submit" value="@StenoCryptor.Web.Localization.Views.Home.Go" class="submit-button" />
+                <input type="submit" value="@StenoCryptor.Web.Localization.Views.Home.Go" />
             </div>
         </div>
-    </div>
+    </section>
 }

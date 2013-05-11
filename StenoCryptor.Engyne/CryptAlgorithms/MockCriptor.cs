@@ -24,9 +24,9 @@ namespace StenoCryptor.Engyne.CryptAlgorithms
             return true;
         }
 
-        public Commons.Key ParseKey(string key)
+        public byte[] ParseKey(string key)
         {
-            return new Commons.Key();
+            throw new NotImplementedException();
         }
     }
 }
