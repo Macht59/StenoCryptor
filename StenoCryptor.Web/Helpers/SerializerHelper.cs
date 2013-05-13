@@ -15,8 +15,16 @@ namespace StenoCryptor.Web.Helpers
             BinaryFormatter formatter = new BinaryFormatter();
             MemoryStream stream = new MemoryStream();
             formatter.Serialize(stream, obj);
+            stream.Position = 0;
 
             return stream;
+        }
+
+        public static object DeserializeBinary(Stream stream)
+        {
+            BinaryFormatter formatter = new BinaryFormatter();
+         
+            return formatter.Deserialize(stream);
         }
     }
 }

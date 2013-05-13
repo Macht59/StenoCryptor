@@ -1,4 +1,5 @@
 ﻿using StenoCryptor.Commons;
+using StenoCryptor.Commons.Enums;
 using StenoCryptor.Interfaces;
 using System;
 using System.Globalization;
@@ -749,6 +750,11 @@ namespace StenoCryptor.Engyne.CryptAlgorithms
             }
 
             return bytesKey;
+        }
+
+        public bool ValidateKey(Key key, Container container)
+        {
+            return key.CryptType == CryptType.DES && key.MessageLength == container.InputStream.Length;
         }
 
         #endregion ICryptor Implementation

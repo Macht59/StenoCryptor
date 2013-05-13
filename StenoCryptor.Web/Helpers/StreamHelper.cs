@@ -1,6 +1,8 @@
 ﻿using StenoCryptor.Commons.Constants;
 using System.IO;
 using System.Text;
+using System.Linq;
+using System.Collections.Generic;
 
 namespace StenoCryptor.Web.Helpers
 {
@@ -38,7 +40,7 @@ namespace StenoCryptor.Web.Helpers
         /// <param name="stream">Main stream.</param>
         /// <param name="appendingString">String to be appended.</param>
         /// <remarks>Used default encoding.</remarks>
-        public static void AppendToStream(Stream stream, string appendingString)
+        public static void AppendToStream(MemoryStream stream, string appendingString)
         {
             AppendToStream(stream, appendingString, Constants.DEFAULT_ENCODING);
         }
@@ -49,10 +51,21 @@ namespace StenoCryptor.Web.Helpers
         /// <param name="stream">Main stream.</param>
         /// <param name="appendingString">String to be appended.</param>
         /// <param name="encoding">String encoding.</param>
-        public static void AppendToStream(Stream stream, string appendingString, Encoding encoding)
+        public static void AppendToStream(MemoryStream stream, string appendingString, Encoding encoding)
         {
-            stream.Position = stream.Length;
-            stream.Write(encoding.GetBytes(appendingString), 0, encoding.GetByteCount(appendingString));
+            byte[] streamBytes = StreamToBytesArray(stream);
+            byte[] appendixBytes = encoding.GetBytes(appendingString);
+            IEnumerable<byte> result = streamBytes.Concat(appendixBytes);
+            stream = new MemoryStream(result.ToArray());
+        }
+
+        public static Stream AppendToStream(MemoryStream firstStream, Stream secondStream)
+        {
+            byte[] firstBytesArray = StreamToBytesArray(firstStream);
+            byte[] secondBytesArray = StreamToBytesArray(secondStream);
+            IEnumerable<byte> result = firstBytesArray.Concat(secondBytesArray);
+
+            return new MemoryStream(result.ToArray());
         }
 
         /// <summary>

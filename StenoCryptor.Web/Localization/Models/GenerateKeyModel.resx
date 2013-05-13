@@ -120,6 +120,9 @@
   <data name="errCryptKeyNotValid" xml:space="preserve">
     <value>Encryption password is not valid</value>
   </data>
+  <data name="errFieldErrorMarker" xml:space="preserve">
+    <value>*</value>
+  </data>
   <data name="errKeyRequired" xml:space="preserve">
     <value>The Password field is required</value>
   </data>

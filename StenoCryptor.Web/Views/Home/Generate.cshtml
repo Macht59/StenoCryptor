@@ -6,7 +6,7 @@
 
 <h2>@ViewBag.Title</h2>
 
-@using (Html.BeginForm(HomeController.GENERATE, HomeController.CONTROLLER, new { enctype = "multipart/form-data" }, FormMethod.Post, null))
+@using (Html.BeginForm(HomeController.GENERATE, HomeController.CONTROLLER, FormMethod.Post, new { enctype = "multipart/form-data" }))
 {
     <section class="row-container">
         <div class="row clear-fix">
@@ -15,6 +15,7 @@
             </div>
             <div class="row-content">
                 <input type="file" name="photoFile" id="photoFile" />
+                @Html.ValidationMessage("photoFile", StenoCryptor.Web.Localization.Models.GenerateKeyModel.errFieldErrorMarker)
             </div>
         </div>
         <div class="row clear-fix">
@@ -31,7 +32,7 @@
             </div>
             <div class="row-content">
                 @Html.EditorFor(model => model.Key)
-                @Html.ValidationMessageFor(model => model.Key)
+                @Html.ValidationMessageFor(model => model.Key, StenoCryptor.Web.Localization.Models.GenerateKeyModel.errFieldErrorMarker)
             </div>
         </div>
         

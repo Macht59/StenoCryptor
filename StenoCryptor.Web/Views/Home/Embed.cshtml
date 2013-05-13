@@ -6,7 +6,7 @@
 
 <h2>@ViewBag.Title</h2>
 
-@using (Html.BeginForm(StenoCryptor.Web.Controllers.HomeController.EMBED, StenoCryptor.Web.Controllers.HomeController.CONTROLLER, FormMethod.Post, new { enctype = "multipart/form-data" }))
+@using (Html.BeginForm(HomeController.EMBED, HomeController.CONTROLLER, FormMethod.Post, new { enctype = "multipart/form-data" }))
 {
     <section class="row-container">
         <div class="row clear-fix">
@@ -14,7 +14,8 @@
                 @Html.Label("photoFile", StenoCryptor.Web.Localization.Models.DwmEmbedModel.Container)
             </div>
             <div class="row-content">
-                <input type="file" name="photoFile" id="photoFile" data-val-required="*" data-val="true" />
+                <input type="file" name="photoFile" id="photoFile" />
+                @Html.ValidationMessage("photoFile", StenoCryptor.Web.Localization.Models.DwmEmbedModel.errFieldErrorMarker)
             </div>
         </div>
         <div class="row clear-fix">
@@ -35,10 +36,11 @@
         </div>
         <div class="row clear-fix">
             <div class="row-label">
-                @Html.LabelFor(m => m.CryptPassword, StenoCryptor.Web.Localization.Models.DwmEmbedModel.CryptPassword)
+                @Html.Label("keyFile", StenoCryptor.Web.Localization.Models.DwmEmbedModel.CryptPassword)
             </div>
             <div class="row-content">
-                @Html.TextBoxFor(m => m.CryptPassword)
+                <input type="file" name="keyFile" id="keyFile" />
+                @Html.ValidationMessage("keyFile", StenoCryptor.Web.Localization.Models.DwmEmbedModel.errFieldErrorMarker)
             </div>
         </div>
         <div class="row clear-fix">
@@ -47,6 +49,7 @@
             </div>
             <div class="row-content">
                 @Html.TextAreaFor(m => m.Message)
+                @Html.ValidationMessage("Message", StenoCryptor.Web.Localization.Models.DwmEmbedModel.errFieldErrorMarker)
             </div>
         </div>
         <div class="row clear-fix">

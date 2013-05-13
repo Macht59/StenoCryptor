@@ -124,7 +124,7 @@
     <value>Crypting Type:</value>
   </data>
   <data name="CryptPassword" xml:space="preserve">
-    <value>Password:</value>
+    <value>Key:</value>
   </data>
   <data name="EmbedingType" xml:space="preserve">
     <value>Embeding Type:</value>
@@ -136,6 +136,12 @@
     <value>Message:</value>
   </data>
   <data name="ErrPasswordRequired" xml:space="preserve">
-    <value>Password is required</value>
+    <value>Key is required</value>
+  </data>
+  <data name="errFieldErrorMarker" xml:space="preserve">
+    <value>*</value>
+  </data>
+  <data name="errKeyInvalid" xml:space="preserve">
+    <value>Key file is not valid</value>
   </data>
 </root>

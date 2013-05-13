@@ -70,6 +70,15 @@ namespace StenoCryptor.Web.Localization.Models {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to *.
+        /// </summary>
+        public static string errFieldErrorMarker {
+            get {
+                return ResourceManager.GetString("errFieldErrorMarker", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to The Password field is required.
         /// </summary>
         public static string errKeyRequired {

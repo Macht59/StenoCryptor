@@ -436,5 +436,11 @@ namespace StenoCryptor.Engyne.CryptAlgorithms
         {
             throw new System.NotImplementedException();
         }
+
+
+        public bool ValidateKey(Key key, Container container)
+        {
+            throw new System.NotImplementedException();
+        }
     }
 }

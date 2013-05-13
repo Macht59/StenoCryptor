@@ -74,6 +74,7 @@ namespace StenoCryptor.Web.Controllers
                 Key key = new Key();
                 key.MessageLength = photoFile.InputStream.Length;
                 key.Value = cryptor.ParseKey(model.Key);
+                key.CryptType = model.CryptType;
 
                 return File(SerializeHelper.SerializeBinary(key), Constants.BINARY_CONTENT_TYPE, Constants.DEFAULT_KEY_NAME);
             }
@@ -88,20 +89,27 @@ namespace StenoCryptor.Web.Controllers
         }
 
         [HttpPost]
-        public ActionResult Embed(Models.DwmModel model, HttpPostedFileBase photoFile)
+        public ActionResult Embed(Models.DwmModel model, HttpPostedFileBase photoFile, HttpPostedFileBase keyFile)
         {
             if (photoFile == null)
                 ModelState.AddModelError("photoFile", Localization.Views.Shared.FileIsNotSelected);
+
+            if (keyFile == null)
+                ModelState.AddModelError("keyFile", Localization.Views.Shared.FileIsNotSelected);
+
+            ICryptor cryptor = _algorithmFactory.GetInstance(model.CryptType);
+            IEmbeder embeder = _embederFactory.GetInstance(model.EmbedType);
+            Container container = new Container(photoFile.InputStream, photoFile.ContentType);
+            Key key = SerializeHelper.DeserializeBinary(keyFile.InputStream) as Key;
+
+            if (key == null)
+                ModelState.AddModelError(string.Empty, Localization.Models.DwmEmbedModel.errKeyInvalid);
 
             if (ModelState.IsValid)
             {
                 try
                 {
-                    ICryptor cryptor = _algorithmFactory.GetInstance(model.CryptType);
-                    IEmbeder embeder = _embederFactory.GetInstance(model.EmbedType);
-                    Container container = new Container(photoFile.InputStream, photoFile.ContentType);
-
-                    TempData[TempDataKeys.FILE_NAME] = FileProcessorHelper.EmbedDwm(cryptor, embeder, model.Message, model.CryptPassword, container, Path.GetFileName(photoFile.FileName));
+                    TempData[TempDataKeys.FILE_NAME] = FileProcessorHelper.EmbedDwm(cryptor, embeder, model.Message, key, container, Path.GetFileName(photoFile.FileName));
                     TempData[TempDataKeys.CONTENT_TYPE] = photoFile.ContentType;
                 }
                 catch (Exception ex)

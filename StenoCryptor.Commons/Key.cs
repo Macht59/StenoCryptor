@@ -1,4 +1,5 @@
-﻿using System;
+﻿using StenoCryptor.Commons.Enums;
+using System;
 
 namespace StenoCryptor.Commons
 {
@@ -12,6 +13,11 @@ namespace StenoCryptor.Commons
         /// Length of hidden message.
         /// </summary>
         public long MessageLength { get; set; }
+
+        /// <summary>
+        /// Crypt type this key used for.
+        /// </summary>
+        public CryptType CryptType { get; set; }
 
         /// <summary>
         /// Key itself.

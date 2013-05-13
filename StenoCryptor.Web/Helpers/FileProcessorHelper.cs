@@ -18,19 +18,22 @@ namespace StenoCryptor.Web.Helpers
         /// <param name="cryptor">Crypt algorithm.</param>
         /// <param name="embeder">Embeding algorithm.</param>
         /// <param name="message">Secret message.</param>
-        /// <param name="password">Crypting password.</param>
+        /// <param name="key">Crypting key.</param>
         /// <param name="container">Container.</param>
         /// <param name="fileName">Container file name.</param>
         /// <returns>Saved file name at server.</returns>
-        public static string EmbedDwm(ICryptor cryptor, IEmbeder embeder, string message, string password, Container container, string fileName)
+        public static string EmbedDwm(ICryptor cryptor, IEmbeder embeder, string message, Key key, Container container, string fileName)
         {
-            if (!cryptor.ValidateKey(password))
+            if (!cryptor.ValidateKey(key, container))
                 throw new ArgumentException(Localization.Views.Shared.WrongKey);
 
             int messageLength = Constants.DEFAULT_ENCODING.GetByteCount(message);
-            MemoryStream messageStream = new MemoryStream(BitConverter.GetBytes(messageLength));
-            StreamHelper.AppendToStream(messageStream, message);
-            Stream cryptedMessage = null;// cryptor.Encrypt(messageStream, cryptor.ParseKey(password));
+            MemoryStream messageLengthStream = new MemoryStream(BitConverter.GetBytes(messageLength));
+
+            Stream cryptedMessage = cryptor.Encrypt(StreamHelper.StringToStream(message), key);
+
+            cryptedMessage = StreamHelper.AppendToStream(messageLengthStream, cryptedMessage);
+            
             embeder.Embed(container, StreamHelper.StreamToBytesArray(cryptedMessage));
 
             return StreamHelper.SaveFile(container.InputStream, fileName);

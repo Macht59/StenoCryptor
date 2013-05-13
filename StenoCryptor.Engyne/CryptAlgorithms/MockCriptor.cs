@@ -28,5 +28,11 @@ namespace StenoCryptor.Engyne.CryptAlgorithms
         {
             throw new NotImplementedException();
         }
+
+
+        public bool ValidateKey(Commons.Key key, Commons.Container container)
+        {
+            throw new NotImplementedException();
+        }
     }
 }
