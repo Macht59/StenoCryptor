@@ -26,14 +26,18 @@ namespace StenoCryptor.Web.Helpers
         {
             if (!cryptor.ValidateKey(key, container))
                 throw new ArgumentException(Localization.Views.Shared.WrongKey);
-
+            
+            //Add message length to the DWM
             int messageLength = Constants.DEFAULT_ENCODING.GetByteCount(message);
             MemoryStream messageLengthStream = new MemoryStream(BitConverter.GetBytes(messageLength));
 
+            //Ctypting the message
             Stream cryptedMessage = cryptor.Encrypt(StreamHelper.StringToStream(message), key);
 
+            //Concat length and message into single DWM
             cryptedMessage = StreamHelper.AppendToStream(messageLengthStream, cryptedMessage);
             
+            //Embeding DWM
             embeder.Embed(container, StreamHelper.StreamToBytesArray(cryptedMessage));
 
             return StreamHelper.SaveFile(container.InputStream, fileName);
