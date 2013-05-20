@@ -170,7 +170,8 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Helpers\FileProcessorHelper.cs" />
+    <Compile Include="Helpers\DwmProcessorHelper.cs" />
+    <Compile Include="Helpers\KeyMakerHelper.cs" />
     <Compile Include="Helpers\SerializerHelper.cs" />
     <Compile Include="Helpers\StreamHelper.cs" />
     <Compile Include="Localization\Models\DwmEmbedModel.Designer.cs">

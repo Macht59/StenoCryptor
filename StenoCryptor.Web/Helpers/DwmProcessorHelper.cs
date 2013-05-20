@@ -10,7 +10,7 @@ namespace StenoCryptor.Web.Helpers
     /// <summary>
     /// Uses engine to process files and DWM.
     /// </summary>
-    public static class FileProcessorHelper
+    public static class DwmProcessorHelper
     {
         /// <summary>
         /// Embeds DWM within container file.

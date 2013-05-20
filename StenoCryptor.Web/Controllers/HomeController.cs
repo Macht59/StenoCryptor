@@ -89,18 +89,17 @@ namespace StenoCryptor.Web.Controllers
         }
 
         [HttpPost]
-        public ActionResult Embed(Models.DwmModel model, HttpPostedFileBase photoFile, HttpPostedFileBase keyFile)
+        public ActionResult Embed(Models.DwmModel model, HttpPostedFileBase photoFile)
         {
             if (photoFile == null)
                 ModelState.AddModelError("photoFile", Localization.Views.Shared.FileIsNotSelected);
 
-            if (keyFile == null)
-                ModelState.AddModelError("keyFile", Localization.Views.Shared.FileIsNotSelected);
-
             ICryptor cryptor = _algorithmFactory.GetInstance(model.CryptType);
             IEmbeder embeder = _embederFactory.GetInstance(model.EmbedType);
             Container container = new Container(photoFile.InputStream, photoFile.ContentType);
-            Key key = SerializeHelper.DeserializeBinary(keyFile.InputStream) as Key;
+            byte[] keyValue;
+
+            Key key = KeyMakerHelper.GenerateKey(container, model.Message, model.CryptType, keyValue);
 
             if (key == null)
                 ModelState.AddModelError(string.Empty, Localization.Models.DwmEmbedModel.errKeyInvalid);
@@ -109,16 +108,18 @@ namespace StenoCryptor.Web.Controllers
             {
                 try
                 {
-                    TempData[TempDataKeys.FILE_NAME] = FileProcessorHelper.EmbedDwm(cryptor, embeder, model.Message, key, container, Path.GetFileName(photoFile.FileName));
-                    TempData[TempDataKeys.CONTENT_TYPE] = photoFile.ContentType;
+                    TempData[TempDataKeys.FILE_NAME] = new FileModel()
+                    {
+                        FileName = DwmProcessorHelper.EmbedDwm(cryptor, embeder, model.Message, key, container, Path.GetFileName(photoFile.FileName)),
+                        ContentType = photoFile.ContentType
+                    };
+                    return RedirectToAction(HomeController.EMBED_RESULT);
                 }
                 catch (Exception ex)
                 {
                     TempData[TempDataKeys.ERROR] = ex.Message;
                     return View(SharedController.ERROR);
                 }
-
-                return RedirectToAction(HomeController.EMBED_RESULT);
             }
 
             return View();
@@ -133,11 +134,7 @@ namespace StenoCryptor.Web.Controllers
                 return View(SharedController.ERROR);
             }
 
-            return View(new Models.FileModel()
-            {
-                FileName = (string)TempData[TempDataKeys.FILE_NAME],
-                ContentType = (string)TempData[TempDataKeys.CONTENT_TYPE]
-            });
+            return View((FileModel)TempData[TempDataKeys.FILE_NAME]);
         }
 
         [HttpGet]
@@ -155,7 +152,7 @@ namespace StenoCryptor.Web.Controllers
             if (ModelState.IsValid)
             {
                 IDetector detector = _detectorFactory.GetInstance();
-                TempData[TempDataKeys.DETECT_RESULT] = FileProcessorHelper.DetectDwm(detector, photoFile.InputStream);
+                TempData[TempDataKeys.DETECT_RESULT] = DwmProcessorHelper.DetectDwm(detector, photoFile.InputStream);
 
                 return RedirectToAction(DETECT_RESULT);
             }
@@ -192,7 +189,7 @@ namespace StenoCryptor.Web.Controllers
             if (ModelState.IsValid)
             {
                 Container container = new Container(photoFile.InputStream, photoFile.ContentType);
-                DwmModel model = FileProcessorHelper.ExtractDwm(container, null);
+                DwmModel model = DwmProcessorHelper.ExtractDwm(container, null);
 
                 TempData[TempDataKeys.FILE_NAME] = StreamHelper.SaveFile(container.InputStream, Path.GetFileName(photoFile.FileName));
                 TempData[TempDataKeys.CONTENT_TYPE] = photoFile.ContentType;
