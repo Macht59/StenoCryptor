@@ -31,7 +31,8 @@ namespace StenoCryptor.Engyne.Embeders
                     int number = (x + 1) * (y + 1);
                     if (number > message.Length)
                     {
-                        bitmap.Save(container.InputStream, ImageFormat.Bmp);
+                        byte[] bytes = (byte[])(new ImageConverter().ConvertTo(bitmap, typeof(byte[])));
+                        container.InputStream = new MemoryStream(bytes);
                         return;
                     }
 

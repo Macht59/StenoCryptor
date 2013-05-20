@@ -72,11 +72,10 @@ namespace StenoCryptor.Web.Helpers
         /// Saves stream to file with pointed name.
         /// </summary>
         /// <param name="stream">Stream to save from.</param>
-        /// <param name="fileName">File name.</param>
+        /// <param name="fileName">Full file name.</param>
         /// <returns>Addres of file on server.</returns>
         public static string SaveFile(Stream stream, string fileName)
         {
-            fileName = Path.Combine(Path.GetTempPath(), Path.GetFileName(fileName));
             using (FileStream fs = File.Create(fileName))
             {
                 byte[] bytesInStream = new byte[stream.Length];

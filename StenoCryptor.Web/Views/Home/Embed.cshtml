@@ -36,11 +36,10 @@
         </div>
         <div class="row clear-fix">
             <div class="row-label">
-                @Html.Label("keyFile", StenoCryptor.Web.Localization.Models.DwmEmbedModel.CryptPassword)
+                @Html.LabelFor(m => m.Key, StenoCryptor.Web.Localization.Models.DwmEmbedModel.CryptPassword)
             </div>
             <div class="row-content">
-                <input type="file" name="keyFile" id="keyFile" />
-                @Html.ValidationMessage("keyFile", StenoCryptor.Web.Localization.Models.DwmEmbedModel.errFieldErrorMarker)
+                @Html.EditorFor(m => m.Key)
             </div>
         </div>
         <div class="row clear-fix">

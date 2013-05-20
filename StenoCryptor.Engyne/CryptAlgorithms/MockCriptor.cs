@@ -1,20 +1,17 @@
-﻿using StenoCryptor.Interfaces;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using StenoCryptor.Commons;
+using StenoCryptor.Interfaces;
+using System.IO;
 
 namespace StenoCryptor.Engyne.CryptAlgorithms
 {
     public class MockCriptor: ICryptor
     {
-        public System.IO.Stream Encrypt(System.IO.Stream message, Commons.Key key)
+        public System.IO.Stream Encrypt(Stream message, Key key)
         {
             return message;
         }
 
-        public System.IO.Stream Decrypt(System.IO.Stream message, Commons.Key key)
+        public System.IO.Stream Decrypt(Stream message, Key key)
         {
             return message;
         }
@@ -26,13 +23,13 @@ namespace StenoCryptor.Engyne.CryptAlgorithms
 
         public byte[] ParseKey(string key)
         {
-            throw new NotImplementedException();
+            return null;
         }
 
 
-        public bool ValidateKey(Commons.Key key, Commons.Container container)
+        public bool ValidateKey(Key key, Container container)
         {
-            throw new NotImplementedException();
+            return true;
         }
     }
 }

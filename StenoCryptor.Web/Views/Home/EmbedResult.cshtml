@@ -10,7 +10,7 @@
 <h2>@ViewBag.Title</h2>
 
 <p>
-    @string.Format(StenoCryptor.Web.Localization.Views.Home.FileProcessed, System.IO.Path.GetFileName((string)TempData[StenoCryptor.Commons.Constants.TempDataKeys.FILE_NAME]))
+    @string.Format(StenoCryptor.Web.Localization.Views.Home.FileProcessed, System.IO.Path.GetFileName(Model.FileName))
 </p>
 <p>
     @Html.ActionLink(StenoCryptor.Web.Localization.Views.Home.Download, StenoCryptor.Web.Controllers.SharedController.DOWNLOAD, StenoCryptor.Web.Controllers.SharedController.CONTROLLER, new { fileName = Model.FileName, contentType = Model.ContentType }, null)

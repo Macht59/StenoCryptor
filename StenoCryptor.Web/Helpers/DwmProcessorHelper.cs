@@ -13,7 +13,7 @@ namespace StenoCryptor.Web.Helpers
     public static class DwmProcessorHelper
     {
         /// <summary>
-        /// Embeds DWM within container file.
+        /// Embeds DWM within container.
         /// </summary>
         /// <param name="cryptor">Crypt algorithm.</param>
         /// <param name="embeder">Embeding algorithm.</param>
@@ -22,25 +22,10 @@ namespace StenoCryptor.Web.Helpers
         /// <param name="container">Container.</param>
         /// <param name="fileName">Container file name.</param>
         /// <returns>Saved file name at server.</returns>
-        public static string EmbedDwm(ICryptor cryptor, IEmbeder embeder, string message, Key key, Container container, string fileName)
+        public static void EmbedDwm(ICryptor cryptor, IEmbeder embeder, string message, Key key, Container container)
         {
-            if (!cryptor.ValidateKey(key, container))
-                throw new ArgumentException(Localization.Views.Shared.WrongKey);
-            
-            //Add message length to the DWM
-            int messageLength = Constants.DEFAULT_ENCODING.GetByteCount(message);
-            MemoryStream messageLengthStream = new MemoryStream(BitConverter.GetBytes(messageLength));
-
-            //Ctypting the message
             Stream cryptedMessage = cryptor.Encrypt(StreamHelper.StringToStream(message), key);
-
-            //Concat length and message into single DWM
-            cryptedMessage = StreamHelper.AppendToStream(messageLengthStream, cryptedMessage);
-            
-            //Embeding DWM
             embeder.Embed(container, StreamHelper.StreamToBytesArray(cryptedMessage));
-
-            return StreamHelper.SaveFile(container.InputStream, fileName);
         }
 
         /// <summary>

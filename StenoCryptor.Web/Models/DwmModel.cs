@@ -11,5 +11,7 @@ namespace StenoCryptor.Web.Models
         public EmbedType EmbedType { get; set; }
 
         public CryptType CryptType { get; set; }
+
+        public string Key { get; set; }
     }
 }

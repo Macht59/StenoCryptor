@@ -12,7 +12,7 @@ namespace StenoCryptor.Commons
         /// <summary>
         /// Length of hidden message.
         /// </summary>
-        public long MessageLength { get; set; }
+        public int MessageLength { get; set; }
 
         /// <summary>
         /// Crypt type this key used for.
