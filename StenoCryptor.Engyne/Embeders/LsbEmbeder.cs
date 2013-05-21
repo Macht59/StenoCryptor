@@ -45,7 +45,7 @@ namespace StenoCryptor.Engyne.Embeders
             bitmap.Save(container.InputStream, ImageFormat.Bmp);
         }
 
-        public byte[] Extract(Container container)
+        public byte[] Extract(Container container, Key key)
         {
             throw new NotImplementedException();
         }

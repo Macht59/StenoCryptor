@@ -1,4 +1,5 @@
-﻿using StenoCryptor.Interfaces;
+﻿using StenoCryptor.Commons;
+using StenoCryptor.Interfaces;
 
 namespace StenoCryptor.Engyne.Embeders
 {
@@ -9,7 +10,7 @@ namespace StenoCryptor.Engyne.Embeders
         }
 
 
-        public byte[] Extract(Commons.Container container)
+        public byte[] Extract(Commons.Container container, Key key)
         {
             return new byte[0];
         }

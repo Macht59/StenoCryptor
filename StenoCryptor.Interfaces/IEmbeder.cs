@@ -6,6 +6,6 @@ namespace StenoCryptor.Interfaces
     {
         void Embed(Container container, byte[] message);
 
-        byte[] Extract(Container container);
+        byte[] Extract(Container container, Key key);
     }
 }

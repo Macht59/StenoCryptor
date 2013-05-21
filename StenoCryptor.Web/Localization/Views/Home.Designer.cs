@@ -133,11 +133,29 @@ namespace StenoCryptor.Web.Localization.Views {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Key file is not valid.
+        /// </summary>
+        public static string errKeyFileIsNotValid {
+            get {
+                return ResourceManager.GetString("errKeyFileIsNotValid", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to File is not selected or it is empty.
         /// </summary>
         public static string ErrPostFileIsNullOrEmpty {
             get {
                 return ResourceManager.GetString("ErrPostFileIsNullOrEmpty", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to There is no messsage to display.
+        /// </summary>
+        public static string errTheresNoMessage {
+            get {
+                return ResourceManager.GetString("errTheresNoMessage", resourceCulture);
             }
         }
         

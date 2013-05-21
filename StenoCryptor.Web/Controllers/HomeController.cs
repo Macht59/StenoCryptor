@@ -62,7 +62,7 @@ namespace StenoCryptor.Web.Controllers
         }
 
         [HttpPost]
-        public ActionResult Embed(Models.DwmModel model, HttpPostedFileBase photoFile)
+        public ActionResult Embed(Models.EmbedDwmModel model, HttpPostedFileBase photoFile)
         {
             if (photoFile == null)
                 ModelState.AddModelError("photoFile", Localization.Views.Shared.FileIsNotSelected);
@@ -152,19 +152,23 @@ namespace StenoCryptor.Web.Controllers
         }
 
         [HttpPost]
-        public ActionResult Extract(HttpPostedFileBase photoFile)
+        public ActionResult Extract(HttpPostedFileBase photoFile, HttpPostedFileBase keyFile, ExtractDwmModel model)
         {
-            if (photoFile == null || photoFile.InputStream.Length == 0)
+            if (photoFile == null || keyFile == null)
                 ModelState.AddModelError("photoFile", Localization.Views.Home.ErrPostFileIsNullOrEmpty);
+
+            Key key = SerializeHelper.DeserializeBinary(keyFile.InputStream) as Key;
+            if (key == null)
+                ModelState.AddModelError("keyFile", Localization.Views.Home.errKeyFileIsNotValid);
 
             if (ModelState.IsValid)
             {
+                IEmbeder embeder = _embederFactory.GetInstance(model.EmbedType);
+                ICryptor cryptor = _algorithmFactory.GetInstance(model.CryptType);
                 Container container = new Container(photoFile.InputStream, photoFile.ContentType);
-                DwmModel model = DwmProcessorHelper.ExtractDwm(container, null);
+                string message = DwmProcessorHelper.ExtractDwm(embeder, cryptor, key, container);
 
-                TempData[TempDataKeys.FILE_NAME] = StreamHelper.SaveFile(container.InputStream, Path.GetFileName(photoFile.FileName));
-                //TempData[TempDataKeys.CONTENT_TYPE] = photoFile.ContentType;
-                TempData[TempDataKeys.EXTRACTED_MODEL] = model;
+                TempData[TempDataKeys.EXTRACTED_MESSAGE] = message;
 
                 return RedirectToAction(EXTRACT_RESULT);
             }
@@ -175,15 +179,13 @@ namespace StenoCryptor.Web.Controllers
         [HttpGet]
         public ActionResult ExtractResult()
         {
-            if (TempData[TempDataKeys.FILE_NAME] == null ||
-                TempData[TempDataKeys.EXTRACTED_MODEL] == null)
+            if (TempData[TempDataKeys.EXTRACTED_MESSAGE] == null)
             {
-                TempData[TempDataKeys.ERROR] = Localization.Views.Home.AccessError;
+                TempData[TempDataKeys.ERROR] = Localization.Views.Home.errTheresNoMessage;
                 return View(SharedController.ERROR);
             }
 
             ViewBag.FileName = TempData[TempDataKeys.FILE_NAME];
-            //ViewBag.ContentType = TempData[TempDataKeys.CONTENT_TYPE];
 
             return View(TempData[TempDataKeys.EXTRACTED_MODEL]);
         }

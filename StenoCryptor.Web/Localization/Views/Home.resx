@@ -141,6 +141,9 @@
   <data name="EmbedDwm" xml:space="preserve">
     <value>Embed DWM</value>
   </data>
+  <data name="errKeyFileIsNotValid" xml:space="preserve">
+    <value>Key file is not valid</value>
+  </data>
   <data name="ErrPostFileIsNullOrEmpty" xml:space="preserve">
     <value>File is not selected or it is empty</value>
   </data>
@@ -173,5 +176,8 @@
   </data>
   <data name="Symbols" xml:space="preserve">
     <value>Symbols</value>
+  </data>
+  <data name="errTheresNoMessage" xml:space="preserve">
+    <value>There is no messsage to display</value>
   </data>
 </root>

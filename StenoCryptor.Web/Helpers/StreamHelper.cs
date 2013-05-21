@@ -94,5 +94,22 @@ namespace StenoCryptor.Web.Helpers
                 return ms.ToArray();
             }
         }
+
+        public static Stream BytesToStream(byte[] bytes)
+        {
+            return new MemoryStream(bytes);
+        }
+
+        public static string StreamToString(Stream stream)
+        {
+            return StreamToString(stream, Constants.DEFAULT_ENCODING);
+        }
+
+        public static string StreamToString(Stream stream, Encoding encoding)
+        {
+            byte[] bytes = StreamToBytesArray(stream);
+
+            return encoding.GetString(bytes);
+        }
     }
 }

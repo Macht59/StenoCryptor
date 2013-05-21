@@ -1,4 +1,4 @@
-﻿@model StenoCryptor.Web.Models.DwmModel
+﻿@model StenoCryptor.Web.Models.ExtractDwmModel
 @{
     ViewBag.Title = StenoCryptor.Web.Localization.Views.Home.ExtractDwm;
 }
@@ -18,6 +18,14 @@
         </div>
         <div class="row clear-fix">
             <div class="row-label">
+                @Html.Label("keyFile", StenoCryptor.Web.Localization.Models.DwmEmbedModel.CryptPassword)
+            </div>
+            <div class="row-content">
+                <input type="file" name="keyFile" id="keyFile" data-val-required="*" data-val="true" />
+            </div>
+        </div>
+        <div class="row clear-fix">
+            <div class="row-label">
                 @Html.LabelFor(m => m.EmbedType, StenoCryptor.Web.Localization.Models.DwmEmbedModel.EmbedingType)
             </div>
             <div class="row-content">
@@ -30,14 +38,6 @@
             </div>
             <div class="row-content">
                 @Html.DropDownListFor(m => m.CryptType, new SelectList(Enum.GetValues(typeof(StenoCryptor.Commons.Enums.CryptType))))
-            </div>
-        </div>
-        <div class="row clear-fix">
-            <div class="row-label">
-                @Html.LabelFor(m => m.CryptPassword, StenoCryptor.Web.Localization.Models.DwmEmbedModel.CryptPassword)
-            </div>
-            <div class="row-content">
-                @Html.TextBoxFor(m => m.CryptPassword)
             </div>
         </div>
         <div class="row clear-fix">

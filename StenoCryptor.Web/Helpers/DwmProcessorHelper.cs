@@ -40,10 +40,12 @@ namespace StenoCryptor.Web.Helpers
             return detector.Detect(container);
         }
 
-        public static DwmModel ExtractDwm(Container container, IEmbeder embeder)
+        public static string ExtractDwm(IEmbeder embeder, ICryptor cryptor, Key key, Container container)
         {
-            
-            return new DwmModel();
+            byte[] byteMessage = embeder.Extract(container, key);
+            Stream message = cryptor.Decrypt(StreamHelper.BytesToStream(byteMessage), key);
+
+            return StreamHelper.StreamToString(message);
         }
     }
 }
