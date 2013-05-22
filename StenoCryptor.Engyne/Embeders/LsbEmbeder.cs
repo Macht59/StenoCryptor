@@ -4,6 +4,7 @@ using StenoCryptor.Commons.Enums;
 using StenoCryptor.Engyne.Helpers;
 using StenoCryptor.Interfaces;
 using System;
+using System.Collections.Generic;
 using System.Drawing;
 using System.Drawing.Imaging;
 using System.IO;
@@ -37,7 +38,7 @@ namespace StenoCryptor.Engyne.Embeders
                     }
 
                     Color pixel = bitmap.GetPixel(x, y);
-                    pixel = processPixel(number, pixel, message);
+                    pixel = insertDataInPixel(number, pixel, message);
                     bitmap.SetPixel(x, y, pixel);
                 }
             }
@@ -47,16 +48,37 @@ namespace StenoCryptor.Engyne.Embeders
 
         public byte[] Extract(Container container, Key key)
         {
-            throw new NotImplementedException();
+            if (!container.ContentType.Contains(Constants.IMAGE_CONTENT_TYPE))
+                throw new ArgumentException("LSB is only works with image containers.");
+
+            Bitmap bitmap = new Bitmap(container.InputStream);
+            List<byte> bytes = new List<byte>();
+
+            for (int y = 0; y < bitmap.Height; y++)
+            {
+                for (int x = 0; x < bitmap.Width; x++)
+                {
+                    int number = (x + 1) * (y + 1);
+                    if (number > key.MessageLength)
+                    {
+                        return 
+                    }
+
+                    Color pixel = bitmap.GetPixel(x, y);
+                    
+                }
+            }
+
+            bitmap.Save(container.InputStream, ImageFormat.Bmp);
         }
 
         #endregion
 
         #region Private Logics
 
-        private Color processPixel(int number, Color pixel, byte[] messageArray)
+        private Color insertDataInPixel(int number, Color pixel, byte[] messageArray)
         {
-            int charNumber = number / 2;
+            int charNumber = number >> 1;
             byte byteToHide = messageArray[charNumber];
             int intPixel = pixel.ToArgb();
 
@@ -78,7 +100,45 @@ namespace StenoCryptor.Engyne.Embeders
             return Color.FromArgb(intPixel);
         }
 
-        private int setLastBit(int target, byte byteNumber, int value)
+        private void extractDataFromPixel(Color pixel, int number, List<byte> message)
+        {
+            int intPixel = pixel.ToArgb();
+            int charNumber = number >> 1;
+
+            if ((number & 1) == 1)
+            {
+                message[charNumber] |= (byte)(getLastBit(intPixel, 1) << 7);
+                message[charNumber] |= (byte)(getLastBit(intPixel, 1) << 6);
+                message[charNumber] |= (byte)(getLastBit(intPixel, 1) << 5);
+                message[charNumber] |= (byte)(getLastBit(intPixel, 1) << 4);
+            }
+            else
+            {
+                message[charNumber] |= (byte)(getLastBit(intPixel, 1) << 3);
+                message[charNumber] |= (byte)(getLastBit(intPixel, 1) << 2);
+                message[charNumber] |= (byte)(getLastBit(intPixel, 1) << 1);
+                message[charNumber] |= (byte)getLastBit(intPixel, 1);
+            }
+        }
+
+        private int getLastBit(int value, int number)
+        {
+            switch (number)
+            {
+                case 1:
+                    return (value >> 24) & 1;
+                case 2:
+                    return (value >> 16) & 1;
+                case 3:
+                    return (value >> 8) & 1;
+                case 4:
+                    return value & 1;
+                default: 
+                    throw new ArgumentOutOfRangeException("number");
+            }
+        }
+
+        private int setLastBit(int target, int byteNumber, int value)
         {
             switch (value)
             {
