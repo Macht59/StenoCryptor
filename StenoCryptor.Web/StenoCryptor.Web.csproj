@@ -197,7 +197,6 @@
       <DependentUpon>Shared.resx</DependentUpon>
     </Compile>
     <Compile Include="Models\EmbedDwmModel.cs" />
-    <Compile Include="Models\ExtractDwmModel.cs" />
     <Compile Include="Models\FileModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

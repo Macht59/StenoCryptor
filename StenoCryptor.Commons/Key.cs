@@ -20,6 +20,11 @@ namespace StenoCryptor.Commons
         public CryptType CryptType { get; set; }
 
         /// <summary>
+        /// Embeding type.
+        /// </summary>
+        public EmbedType EmbedType { get; set; }
+
+        /// <summary>
         /// Key itself.
         /// </summary>
         public byte[] Value { get; set; }

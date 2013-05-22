@@ -1,6 +1,4 @@
-﻿@model StenoCryptor.Web.Models.DwmModel
-
-@{
+﻿@{
     ViewBag.Title = StenoCryptor.Web.Localization.Views.Home.ExtractResult;
 }
 
@@ -10,39 +8,10 @@
     @StenoCryptor.Web.Localization.Views.Home.MessageExtracted
 </p>
 
-<div class="row-container">
-    <div class="row clear-fix">
-        <div class="row-label">
-            @Html.LabelFor(m => m.EmbedType, StenoCryptor.Web.Localization.Models.DwmEmbedModel.EmbedingType)
-        </div>
-        <div class="row-content">
-            @Html.DisplayTextFor(m => m.EmbedType)
-        </div>
-    </div>
-    <div class="row clear-fix">
-        <div class="row-label">
-            @Html.LabelFor(m => m.CryptType, StenoCryptor.Web.Localization.Models.DwmEmbedModel.CryptingType)
-        </div>
-        <div class="row-content">
-            @Html.DisplayTextFor(m => m.CryptType)
-        </div>
-    </div>
-    <div class="row clear-fix">
-        <div class="row-label">
-            @Html.LabelFor(m => m.Message, StenoCryptor.Web.Localization.Models.DwmEmbedModel.Message)
-        </div>
-        <div class="row-content">
-            @Html.DisplayTextFor(m => m.Message)
-        </div>
-    </div>
-    <div class="row clear-fix">
-        @Html.ValidationSummary(false)
-    </div>
-    <div class="row clear-fix">
-        <div class="row-label hidden-fix">.</div>
-        <div class="row-content">
-            @Html.ActionLink(StenoCryptor.Web.Localization.Views.Home.Download, SharedController.DOWNLOAD, SharedController.CONTROLLER, new { fileName = ViewBag.FileName, contentType = ViewBag.ContentType }, null)
-        </div>
-    </div>
-</div>
+<p>
+    @StenoCryptor.Web.Localization.Views.Home.Message
+    <p>
+        @ViewBag.Message
+    </p>
+</p>
 

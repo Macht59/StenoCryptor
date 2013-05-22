@@ -61,15 +61,15 @@ namespace StenoCryptor.Engyne.Embeders
                     int number = (x + 1) * (y + 1);
                     if (number > key.MessageLength)
                     {
-                        return 
+                        return bytes.ToArray();
                     }
 
                     Color pixel = bitmap.GetPixel(x, y);
-                    
+                    extractDataFromPixel(pixel, number, bytes);
                 }
             }
 
-            bitmap.Save(container.InputStream, ImageFormat.Bmp);
+            return bytes.ToArray();
         }
 
         #endregion
@@ -104,6 +104,9 @@ namespace StenoCryptor.Engyne.Embeders
         {
             int intPixel = pixel.ToArgb();
             int charNumber = number >> 1;
+
+            if (message.Count <= charNumber)
+                message.Add(0);
 
             if ((number & 1) == 1)
             {
@@ -151,7 +154,7 @@ namespace StenoCryptor.Engyne.Embeders
             }
         }
 
-        private static int setLastBit(int target, byte byteNumber)
+        private static int setLastBit(int target, int byteNumber)
         {
             switch (byteNumber)
             {
@@ -168,7 +171,7 @@ namespace StenoCryptor.Engyne.Embeders
             }
         }
 
-        private static int unsetLastBit(int target, byte byteNumber)
+        private static int unsetLastBit(int target, int byteNumber)
         {
             switch (byteNumber)
             {

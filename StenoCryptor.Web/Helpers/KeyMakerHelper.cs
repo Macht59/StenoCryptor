@@ -11,13 +11,14 @@ namespace StenoCryptor.Web.Helpers
 {
     public static class KeyMakerHelper
     {
-        public static Key GenerateKey(Container container, string message, CryptType cryptType, IKeyAware keyParser, string stringkey)
+        public static Key GenerateKey(Container container, string message, CryptType cryptType, EmbedType embedType, IKeyAware keyParser, string stringkey)
         {
             if (!keyParser.ValidateKey(stringkey))
                 throw new ArgumentException("Key is not valid.");
 
             Key key = new Key();
             key.CryptType = cryptType;
+            key.EmbedType = embedType;
             key.MessageLength = Constants.DEFAULT_ENCODING.GetByteCount(message);
             key.Value = keyParser.ParseKey(stringkey);    
 

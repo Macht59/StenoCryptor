@@ -74,14 +74,13 @@ namespace StenoCryptor.Web.Controllers
                     ICryptor cryptor = _algorithmFactory.GetInstance(model.CryptType);
                     IEmbeder embeder = _embederFactory.GetInstance(model.EmbedType);
                     Container container = new Container(photoFile.InputStream, photoFile.ContentType);
-                    Key key = KeyMakerHelper.GenerateKey(container, model.Message, model.CryptType, cryptor, model.Key);
+                    Key key = KeyMakerHelper.GenerateKey(container, model.Message, model.CryptType, model.EmbedType, cryptor, model.Key);
                     DwmProcessorHelper.EmbedDwm(cryptor, embeder, model.Message, key, container);
                     Stream keyStream = SerializeHelper.SerializeBinary(key);
                     Dictionary<string, Stream> files = new Dictionary<string, Stream>();
                     files.Add(Path.GetFileName(photoFile.FileName), container.InputStream);
                     files.Add(Constants.DEFAULT_KEY_NAME, keyStream);
                     string zipFileName = ZipHelper.CompressFiles(files);
-                    
                     TempData[TempDataKeys.FILE_NAME] = new FileModel(zipFileName, photoFile.ContentType);
 
                     return RedirectToAction(HomeController.EMBED_RESULT);
@@ -152,7 +151,7 @@ namespace StenoCryptor.Web.Controllers
         }
 
         [HttpPost]
-        public ActionResult Extract(HttpPostedFileBase photoFile, HttpPostedFileBase keyFile, ExtractDwmModel model)
+        public ActionResult Extract(HttpPostedFileBase photoFile, HttpPostedFileBase keyFile)
         {
             if (photoFile == null || keyFile == null)
                 ModelState.AddModelError("photoFile", Localization.Views.Home.ErrPostFileIsNullOrEmpty);
@@ -163,8 +162,8 @@ namespace StenoCryptor.Web.Controllers
 
             if (ModelState.IsValid)
             {
-                IEmbeder embeder = _embederFactory.GetInstance(model.EmbedType);
-                ICryptor cryptor = _algorithmFactory.GetInstance(model.CryptType);
+                IEmbeder embeder = _embederFactory.GetInstance(key.EmbedType);
+                ICryptor cryptor = _algorithmFactory.GetInstance(key.CryptType);
                 Container container = new Container(photoFile.InputStream, photoFile.ContentType);
                 string message = DwmProcessorHelper.ExtractDwm(embeder, cryptor, key, container);
 
@@ -185,9 +184,9 @@ namespace StenoCryptor.Web.Controllers
                 return View(SharedController.ERROR);
             }
 
-            ViewBag.FileName = TempData[TempDataKeys.FILE_NAME];
+            ViewBag.Message = TempData[TempDataKeys.EXTRACTED_MESSAGE];
 
-            return View(TempData[TempDataKeys.EXTRACTED_MODEL]);
+            return View();
         }
 
         #endregion Actions

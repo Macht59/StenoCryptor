@@ -180,4 +180,7 @@
   <data name="errTheresNoMessage" xml:space="preserve">
     <value>There is no messsage to display</value>
   </data>
+  <data name="Message" xml:space="preserve">
+    <value>Message:</value>
+  </data>
 </root>
