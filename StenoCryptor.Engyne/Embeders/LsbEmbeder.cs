@@ -30,7 +30,7 @@ namespace StenoCryptor.Engyne.Embeders
                 for (int x = 0; x < bitmap.Width; x++)
                 {
                     int number = (x + 1) * (y + 1);
-                    if (number > message.Length)
+                    if (number > message.Length << 1)
                     {
                         byte[] bytes = (byte[])(new ImageConverter().ConvertTo(bitmap, typeof(byte[])));
                         container.InputStream = new MemoryStream(bytes);
@@ -52,16 +52,16 @@ namespace StenoCryptor.Engyne.Embeders
                 throw new ArgumentException("LSB is only works with image containers.");
 
             Bitmap bitmap = new Bitmap(container.InputStream);
-            List<byte> bytes = new List<byte>();
+            byte[] bytes = new byte[key.MessageLength];
 
             for (int y = 0; y < bitmap.Height; y++)
             {
                 for (int x = 0; x < bitmap.Width; x++)
                 {
                     int number = (x + 1) * (y + 1);
-                    if (number > key.MessageLength)
+                    if (number > key.MessageLength << 1)
                     {
-                        return bytes.ToArray();
+                        return bytes;
                     }
 
                     Color pixel = bitmap.GetPixel(x, y);
@@ -69,7 +69,7 @@ namespace StenoCryptor.Engyne.Embeders
                 }
             }
 
-            return bytes.ToArray();
+            return bytes;
         }
 
         #endregion
@@ -78,49 +78,46 @@ namespace StenoCryptor.Engyne.Embeders
 
         private Color insertDataInPixel(int number, Color pixel, byte[] messageArray)
         {
-            int charNumber = number >> 1;
+            int charNumber = (number - 1) >> 1;
             byte byteToHide = messageArray[charNumber];
             int intPixel = pixel.ToArgb();
 
-            if (charNumber % 2 == 1)
+            if ((number & 1) == 1)
             {
-                intPixel = setLastBit(intPixel, 1, (byteToHide >> 4) & 1);
-                intPixel = setLastBit(intPixel, 2, (byteToHide >> 5) & 1);
-                intPixel = setLastBit(intPixel, 3, (byteToHide >> 6) & 1);
-                intPixel = setLastBit(intPixel, 4, (byteToHide >> 7) & 1);
+                intPixel = setLastBit(intPixel, 1, (byteToHide >> 7) & 1);
+                intPixel = setLastBit(intPixel, 2, (byteToHide >> 6) & 1);
+                intPixel = setLastBit(intPixel, 3, (byteToHide >> 5) & 1);
+                intPixel = setLastBit(intPixel, 4, (byteToHide >> 4) & 1);
             }
             else
             {
-                intPixel = setLastBit(intPixel, 1, (byteToHide >> 1) & 1);
+                intPixel = setLastBit(intPixel, 1, (byteToHide >> 3) & 1);
                 intPixel = setLastBit(intPixel, 2, (byteToHide >> 2) & 1);
-                intPixel = setLastBit(intPixel, 3, (byteToHide >> 3) & 1);
-                intPixel = setLastBit(intPixel, 4, (byteToHide >> 4) & 1);
+                intPixel = setLastBit(intPixel, 3, (byteToHide >> 1) & 1);
+                intPixel = setLastBit(intPixel, 4, byteToHide & 1);
             }
 
             return Color.FromArgb(intPixel);
         }
 
-        private void extractDataFromPixel(Color pixel, int number, List<byte> message)
+        private void extractDataFromPixel(Color pixel, int number, byte[] message)
         {
             int intPixel = pixel.ToArgb();
-            int charNumber = number >> 1;
-
-            if (message.Count <= charNumber)
-                message.Add(0);
+            int charNumber = (number - 1) >> 1;
 
             if ((number & 1) == 1)
             {
                 message[charNumber] |= (byte)(getLastBit(intPixel, 1) << 7);
-                message[charNumber] |= (byte)(getLastBit(intPixel, 1) << 6);
-                message[charNumber] |= (byte)(getLastBit(intPixel, 1) << 5);
-                message[charNumber] |= (byte)(getLastBit(intPixel, 1) << 4);
+                message[charNumber] |= (byte)(getLastBit(intPixel, 2) << 6);
+                message[charNumber] |= (byte)(getLastBit(intPixel, 3) << 5);
+                message[charNumber] |= (byte)(getLastBit(intPixel, 4) << 4);
             }
             else
             {
                 message[charNumber] |= (byte)(getLastBit(intPixel, 1) << 3);
-                message[charNumber] |= (byte)(getLastBit(intPixel, 1) << 2);
-                message[charNumber] |= (byte)(getLastBit(intPixel, 1) << 1);
-                message[charNumber] |= (byte)getLastBit(intPixel, 1);
+                message[charNumber] |= (byte)(getLastBit(intPixel, 2) << 2);
+                message[charNumber] |= (byte)(getLastBit(intPixel, 3) << 1);
+                message[charNumber] |= (byte)getLastBit(intPixel, 4);
             }
         }
 
