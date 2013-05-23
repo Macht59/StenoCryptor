@@ -21,6 +21,7 @@ namespace StenoCryptor.Engyne.Embeders
                 throw new ArgumentException("LSB is only works with image containers.");
 
             Bitmap bitmap = new Bitmap(container.InputStream);
+            bitmap.MakeTransparent();
 
             if (bitmap.Width * bitmap.Height < message.Length << 1)
                 throw new ArgumentException("Message is to big for this container.");
@@ -40,6 +41,7 @@ namespace StenoCryptor.Engyne.Embeders
                     Color pixel = bitmap.GetPixel(x, y);
                     pixel = insertDataInPixel(number, pixel, message);
                     bitmap.SetPixel(x, y, pixel);
+                    Color pixel2 = bitmap.GetPixel(x, y);
                 }
             }
 
