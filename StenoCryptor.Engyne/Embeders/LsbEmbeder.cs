@@ -41,7 +41,6 @@ namespace StenoCryptor.Engyne.Embeders
                     Color pixel = bitmap.GetPixel(x, y);
                     pixel = insertDataInPixel(number, pixel, message);
                     bitmap.SetPixel(x, y, pixel);
-                    Color pixel2 = bitmap.GetPixel(x, y);
                 }
             }
 
