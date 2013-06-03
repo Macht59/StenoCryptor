@@ -3,7 +3,7 @@ using System;
 
 namespace StenoCryptor.Engyne.Detectors
 {
-    public class MockDetector: IDetector
+    public class GeneralDetector: IDetector
     {
         public bool Detect(Commons.Container container)
         {

@@ -6,7 +6,7 @@ namespace StenoCryptor.Engyne.Detectors
     {
         public IDetector GetInstance()
         {
-            return new MockDetector();
+            return new GeneralDetector();
         }
     }
 }

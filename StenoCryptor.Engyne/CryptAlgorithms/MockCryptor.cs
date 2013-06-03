@@ -4,7 +4,7 @@ using System.IO;
 
 namespace StenoCryptor.Engyne.CryptAlgorithms
 {
-    public class MockCriptor: ICryptor
+    public class MockCryptor: ICryptor
     {
         public System.IO.Stream Encrypt(Stream message, Key key)
         {

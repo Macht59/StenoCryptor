@@ -11,7 +11,7 @@ namespace StenoCryptor.Engyne.CryptAlgorithms
             switch (cryptType)
             {
                 case CryptType.None:
-                    return new MockCriptor();
+                    return new MockCryptor();
                 case CryptType.DES:
                     return new DESCryptor();
                 case CryptType.ThreeDES:
