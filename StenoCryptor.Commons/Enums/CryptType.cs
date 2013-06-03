@@ -6,6 +6,7 @@ namespace StenoCryptor.Commons.Enums
         None,
         DES,
         ThreeDES,
-        AES
+        AES,
+        RSA
     }
 }

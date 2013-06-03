@@ -14,7 +14,7 @@ namespace StenoCryptor.Engyne.Embeders
                 case EmbedType.None:
                     return new MockEmbeder();
                 default:
-                    return new MockEmbeder();
+                    return new LsbEmbeder();
             }
         }
     }

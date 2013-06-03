@@ -86,6 +86,11 @@ namespace StenoCryptor.Engyne.CryptAlgorithms
 
         private byte _Nr;
 
+        public AESCryptor()
+            :this(0)
+        {
+        }
+
         public AESCryptor(ushort KeyLength)
         {
             switch (KeyLength)

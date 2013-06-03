@@ -17,7 +17,9 @@ namespace StenoCryptor.Engyne.CryptAlgorithms
                 case CryptType.ThreeDES:
                     return new TreepleDESCryptor();
                 case CryptType.AES:
-                    return null;
+                    return new AESCryptor();
+                case CryptType.RSA:
+                    return new RSACryptor();
                 default:
                     throw new NotSupportedException("Crypt type is not supperted");
             }
