@@ -48,6 +48,7 @@
     <Compile Include="CryptAlgorithms\TreepleDESCryptor.cs" />
     <Compile Include="Detectors\DetectorFactory.cs" />
     <Compile Include="Detectors\GeneralDetector.cs" />
+    <Compile Include="Embeders\AbstractEmbeder.cs" />
     <Compile Include="Embeders\BarniEmbeder.cs" />
     <Compile Include="Embeders\BenderEmbeder.cs" />
     <Compile Include="Embeders\BenhamEmbeder.cs" />
@@ -67,6 +68,7 @@
     <Compile Include="Embeders\PodilchukEmbeder.cs" />
     <Compile Include="Embeders\RongenEmbeder.cs" />
     <Compile Include="Embeders\TaoEmbeder.cs" />
+    <Compile Include="FormatFactory.cs" />
     <Compile Include="Helpers\BitHelper.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

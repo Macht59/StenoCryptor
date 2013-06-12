@@ -71,15 +71,25 @@ namespace StenoCryptor.Web.Controllers
             {
                 try
                 {
+                    //Inject dependencies
                     ICryptor cryptor = _algorithmFactory.GetInstance(model.CryptType);
                     IEmbeder embeder = _embederFactory.GetInstance(model.EmbedType);
+
+                    //Create container and key
                     Container container = new Container(photoFile.InputStream, photoFile.ContentType);
                     Key key = KeyMakerHelper.GenerateKey(container, model.Message, model.CryptType, model.EmbedType, cryptor, model.Key);
+
+                    //Embed DWM
                     DwmProcessorHelper.EmbedDwm(cryptor, embeder, model.Message, key, container);
+
+                    //Prepare streams to be saved to the files
                     Stream keyStream = SerializeHelper.SerializeBinary(key);
                     Dictionary<string, Stream> files = new Dictionary<string, Stream>();
+
                     files.Add(Path.GetFileName(photoFile.FileName), container.InputStream);
                     files.Add(Constants.DEFAULT_KEY_NAME, keyStream);
+
+                    //Packing files to the zip file
                     string zipFileName = ZipHelper.CompressFiles(files);
                     TempData[TempDataKeys.FILE_NAME] = new FileModel(zipFileName, photoFile.ContentType);
 
