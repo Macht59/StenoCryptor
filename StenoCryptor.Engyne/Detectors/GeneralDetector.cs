@@ -1,13 +1,27 @@
-﻿using StenoCryptor.Interfaces;
+﻿using StenoCryptor.Commons;
+using StenoCryptor.Interfaces;
 using System;
 
 namespace StenoCryptor.Engyne.Detectors
 {
+    /// <summary>
+    /// Detects DWM within container.
+    /// </summary>
     public class GeneralDetector: IDetector
     {
-        public bool Detect(Commons.Container container)
+        /// <summary>
+        /// Detects DWM in container
+        /// </summary>
+        /// <param name="container">Container.</param>
+        /// <returns>True if there is a dwm in container, false otherwise.</returns>
+        public bool Detect(Container container)
         {
-            return new Random().Next() % 2 == 1;
+            return random.Next() % 2 == 1;
         }
+
+        /// <summary>
+        /// Pseudo-random number generator instance.
+        /// </summary>
+        private Random random = new Random();
     }
 }
