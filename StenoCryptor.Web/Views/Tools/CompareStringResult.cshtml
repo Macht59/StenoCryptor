@@ -1,0 +1,11 @@
+﻿@model StenoCryptor.Web.Models.CompareStringsModel
+
+@{
+    ViewBag.Title = StenoCryptor.Web.Localization.Views.Tools.CompareStringResult;
+}
+
+<h2>@Html.ActionLink(StenoCryptor.Web.Localization.Views.Tools.ToolsTitle, ToolsController.INDEX)
+    > @Html.ActionLink(StenoCryptor.Web.Localization.Views.Tools.CompareStrings, ToolsController.COMPARE_STRINGS)
+    > @ViewBag.Title</h2>
+
+@StenoCryptor.Web.Localization.Views.Tools.StringsMuchRate: @TempData[StenoCryptor.Commons.Constants.TempDataKeys.COMPARE_STRING_RESULT]

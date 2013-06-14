@@ -10,11 +10,12 @@
     <section id="main-container">
         <nav id="main-navi-container">
             <ul>
-                <li>@Html.ActionLink(StenoCryptor.Web.Localization.Views.Home.Home_, HomeController.INDEX)</li>
+                <li>@Html.ActionLink(StenoCryptor.Web.Localization.Views.Home.Home_, HomeController.INDEX, HomeController.CONTROLLER)</li>
                 @*<li>@Html.ActionLink(StenoCryptor.Web.Localization.Views.Home.GenerateKeys, HomeController.GENERATE)</li>*@
-                <li>@Html.ActionLink(StenoCryptor.Web.Localization.Views.Home.EmbedDwm, HomeController.EMBED)</li>
-                <li>@Html.ActionLink(StenoCryptor.Web.Localization.Views.Home.DetectDwm, HomeController.DETECT)</li>
-                <li>@Html.ActionLink(StenoCryptor.Web.Localization.Views.Home.ExtractDwm, HomeController.EXTRACT)</li>
+                <li>@Html.ActionLink(StenoCryptor.Web.Localization.Views.Home.EmbedDwm, HomeController.EMBED, HomeController.CONTROLLER)</li>
+                <li>@Html.ActionLink(StenoCryptor.Web.Localization.Views.Home.DetectDwm, HomeController.DETECT, HomeController.CONTROLLER)</li>
+                <li>@Html.ActionLink(StenoCryptor.Web.Localization.Views.Home.ExtractDwm, HomeController.EXTRACT, HomeController.CONTROLLER)</li>
+                <li>@Html.ActionLink(StenoCryptor.Web.Localization.Views.Tools.ToolsTitle, ToolsController.INDEX, ToolsController.CONTROLLER)</li>
             </ul>
         </nav>
         <section id="render-body-section">

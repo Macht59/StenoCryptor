@@ -125,3 +125,10 @@ textarea {
 .hidden-fix {
     visibility: hidden;
 }
+
+/* Styles for tools tab
+-----------------------------------------------------------*/
+
+.compare-text-area {
+    margin: 20px;
+}

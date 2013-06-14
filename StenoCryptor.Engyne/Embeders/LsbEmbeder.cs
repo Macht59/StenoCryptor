@@ -29,7 +29,8 @@ namespace StenoCryptor.Engyne.Embeders
             {
                 for (int x = 0; x < bitmap.Width; x++)
                 {
-                    int number = (x + 1) * (y + 1) - 1;
+                    int number = x + y * bitmap.Width;
+
                     if (number >= message.Length << 3)
                     {
                         container.InputStream = SaveBitmap(bitmap, FormatFactory.GetInstance(container.ContentType));
@@ -54,7 +55,8 @@ namespace StenoCryptor.Engyne.Embeders
             {
                 for (int x = 0; x < bitmap.Width; x++)
                 {
-                    int number = (x + 1) * (y + 1) - 1;
+                    int number = x + y * bitmap.Width;
+
                     if (number >= key.MessageLength << 3)
                     {
                         return bytes;

@@ -1,24 +1,11 @@
-﻿@{
-    Layout = null;
+﻿<h2>
+    @StenoCryptor.Web.Localization.Views.Shared.ErrorHeader
+</h2>
+
+@{
+    if (TempData.Keys.Contains(StenoCryptor.Commons.Constants.TempDataKeys.ERROR))
+    {
+    <p>@TempData[StenoCryptor.Commons.Constants.TempDataKeys.ERROR].ToString()</p>
+    }
 }
 
-<!DOCTYPE html>
-<html>
-<head>
-    <meta name="viewport" content="width=device-width" />
-    <title>@StenoCryptor.Web.Localization.Views.Shared.Error</title>
-</head>
-<body>
-    <h2>
-        @StenoCryptor.Web.Localization.Views.Shared.ErrorHeader
-    </h2>
-
-    @{
-        if (TempData.Keys.Contains(StenoCryptor.Commons.Constants.TempDataKeys.ERROR))
-        {
-        <p>@TempData[StenoCryptor.Commons.Constants.TempDataKeys.ERROR].ToString()</p>
-        }
-    }
-
-</body>
-</html>

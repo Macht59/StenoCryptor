@@ -79,6 +79,7 @@ namespace StenoCryptor.Web.Helpers
             using (FileStream fs = File.Create(fileName))
             {
                 byte[] bytesInStream = new byte[stream.Length];
+                stream.Position = 0;
                 stream.Read(bytesInStream, 0, (int)bytesInStream.Length);
                 fs.Write(bytesInStream, 0, bytesInStream.Length);
 

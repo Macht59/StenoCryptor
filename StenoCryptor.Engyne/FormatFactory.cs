@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Drawing.Imaging;
 using System.Linq;
+using System.Net.Mime;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -16,7 +17,7 @@ namespace StenoCryptor.Engyne
                 case "image/jpg":
                 case "image/jpeg":
                     return ImageFormat.Jpeg;
-                case "imge/png":
+                case "image/png":
                     return ImageFormat.Png;
                 default:
                     throw new NotSupportedException("Current content type is not supported.");

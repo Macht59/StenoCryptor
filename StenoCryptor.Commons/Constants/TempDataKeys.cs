@@ -12,5 +12,7 @@ namespace StenoCryptor.Commons.Constants
         public const string EXTRACTED_MODEL = "dwmExtracedModel";
 
         public const string EXTRACTED_MESSAGE = "extractedMessage";
+
+        public const string COMPARE_STRING_RESULT  = "compareStringResult";
     }
 }

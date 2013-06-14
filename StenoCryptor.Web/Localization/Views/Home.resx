@@ -121,7 +121,7 @@
     <value>You have no access for this page</value>
   </data>
   <data name="AppRepresentationText" xml:space="preserve">
-    <value>StenoCryptor is a web-applicatioin that aims to implement the best scientific researches into stenostography.</value>
+    <value>StenoCryptor is a web-applicatioin that implements the lastest scientific researches within stenostography.</value>
   </data>
   <data name="DetectDwm" xml:space="preserve">
     <value>Detect DWM</value>

@@ -181,6 +181,7 @@
     <Compile Include="Bootstrapper.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\SharedController.cs" />
+    <Compile Include="Controllers\ToolsController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -188,6 +189,7 @@
     <Compile Include="Helpers\KeyMakerHelper.cs" />
     <Compile Include="Helpers\SerializerHelper.cs" />
     <Compile Include="Helpers\StreamHelper.cs" />
+    <Compile Include="Helpers\StringComparerHelper.cs" />
     <Compile Include="Helpers\ZipHelper.cs" />
     <Compile Include="Localization\Models\DwmEmbedModel.Designer.cs">
       <AutoGen>True</AutoGen>
@@ -209,6 +211,12 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Shared.resx</DependentUpon>
     </Compile>
+    <Compile Include="Localization\Views\Tools.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Tools.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Models\CompareStringsModel.cs" />
     <Compile Include="Models\EmbedDwmModel.cs" />
     <Compile Include="Models\FileModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -332,6 +340,9 @@
     <Content Include="Views\Home\EmbedResult.cshtml" />
     <Content Include="Views\Home\DetectResult.cshtml" />
     <Content Include="Views\Home\ExtractResult.cshtml" />
+    <Content Include="Views\Tools\Index.cshtml" />
+    <Content Include="Views\Tools\CompareStrings.cshtml" />
+    <Content Include="Views\Tools\CompareStringResult.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\StenoCryptor.Commons\StenoCryptor.Commons.csproj">
@@ -366,6 +377,10 @@
     <EmbeddedResource Include="Localization\Views\Shared.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>Shared.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Localization\Views\Tools.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>Tools.Designer.cs</LastGenOutput>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

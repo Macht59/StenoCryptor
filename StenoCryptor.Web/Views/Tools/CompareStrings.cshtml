@@ -1,0 +1,15 @@
+﻿@model StenoCryptor.Web.Models.CompareStringsModel
+
+@{
+    ViewBag.Title = StenoCryptor.Web.Localization.Views.Tools.CompareStrings;
+}
+
+<h2>@Html.ActionLink(StenoCryptor.Web.Localization.Views.Tools.ToolsTitle, ToolsController.INDEX) > @ViewBag.Title</h2>
+
+@using (Html.BeginForm())
+{
+    @Html.TextAreaFor(m => m.String1, new { Class = "compare-text-area" })
+    @Html.TextAreaFor(m => m.String2, new { Class = "compare-text-area" })
+    <br />
+    <input type="submit" value="@StenoCryptor.Web.Localization.Views.Tools.Compare" />
+}
