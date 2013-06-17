@@ -9,10 +9,13 @@
       </Site>
     </Sites>
     <Endpoints>
-      <InputEndpoint name="Endpoint1" protocol="http" port="80" />
+      <InputEndpoint name="Endpoint1" protocol="https" port="80" certificate="Certificate1" />
     </Endpoints>
     <Imports>
       <Import moduleName="Diagnostics" />
     </Imports>
+    <Certificates>
+      <Certificate name="Certificate1" storeLocation="LocalMachine" storeName="My" />
+    </Certificates>
   </WebRole>
 </ServiceDefinition>

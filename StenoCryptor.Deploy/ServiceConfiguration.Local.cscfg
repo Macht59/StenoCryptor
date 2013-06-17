@@ -5,5 +5,8 @@
     <ConfigurationSettings>
       <Setting name="Microsoft.WindowsAzure.Plugins.Diagnostics.ConnectionString" value="DefaultEndpointsProtocol=https;AccountName=stenocryptor;AccountKey=Wz7a7jPxXbpWf7H6x2v4Xw7FEw0JPKxIb6vTobAvDCMNmTSzZScC1gfety4OSEvBXJ8i1bz32EnpxTal5RhLgg==" />
     </ConfigurationSettings>
+    <Certificates>
+      <Certificate name="Certificate1" thumbprint="65B596908A5DDDFC522F971550F66F6CF312A951" thumbprintAlgorithm="sha1" />
+    </Certificates>
   </Role>
 </ServiceConfiguration>
