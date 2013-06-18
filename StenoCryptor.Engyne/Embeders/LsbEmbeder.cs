@@ -2,6 +2,7 @@
 using StenoCryptor.Commons.Constants;
 using StenoCryptor.Commons.Enums;
 using StenoCryptor.Engyne.Helpers;
+using StenoCryptor.Enums.Commons;
 using StenoCryptor.Interfaces;
 using System;
 using System.Collections.Generic;
@@ -13,6 +14,15 @@ namespace StenoCryptor.Engyne.Embeders
 {
     public class LsbEmbeder : AbstractEmbeder, IEmbeder
     {
+        #region Constructors
+
+        public LsbEmbeder(EmbedingOptions options)
+        {
+            _options = options;
+        }
+
+        #endregion Constructors
+
         #region Public Logics
 
         public void Embed(Container container, byte[] message)
@@ -107,6 +117,12 @@ namespace StenoCryptor.Engyne.Embeders
                 messageArray[hideCharNamber] &= (byte)(0xFF ^ (1 << (7 - bitNumber)));
             }
         }
+
+        #endregion
+
+        #region Fields
+
+        private EmbedingOptions _options;
 
         #endregion
     }

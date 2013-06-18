@@ -419,33 +419,30 @@ namespace StenoCryptor.Engyne.CryptAlgorithms
 
         #endregion KeyGenerator
 
-
-
         public Stream Encrypt(Stream message, Key key)
         {
-            throw new System.NotImplementedException();
+            return message;
         }
 
         public Stream Decrypt(Stream message, Key key)
         {
-            throw new System.NotImplementedException();
+            return message;
         }
 
         public bool ValidateKey(string key)
         {
-            throw new System.NotImplementedException();
+            return true;
         }
 
 
         public byte[] ParseKey(string key)
         {
-            throw new System.NotImplementedException();
+            return null;
         }
-
 
         public bool ValidateKey(Key key, Container container)
         {
-            throw new System.NotImplementedException();
+            return true;
         }
     }
 }

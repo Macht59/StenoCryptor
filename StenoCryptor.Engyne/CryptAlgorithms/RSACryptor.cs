@@ -11,27 +11,27 @@ namespace StenoCryptor.Engyne.CryptAlgorithms
     {
         public System.IO.Stream Encrypt(System.IO.Stream message, Commons.Key key)
         {
-            throw new NotImplementedException();
+            return message;
         }
 
         public System.IO.Stream Decrypt(System.IO.Stream message, Commons.Key key)
         {
-            throw new NotImplementedException();
+            return message;
         }
 
         public bool ValidateKey(string key)
         {
-            throw new NotImplementedException();
+            return true;
         }
 
         public bool ValidateKey(Commons.Key key, Commons.Container container)
         {
-            throw new NotImplementedException();
+            return true;
         }
 
         public byte[] ParseKey(string key)
         {
-            throw new NotImplementedException();
+            return null;
         }
     }
 }

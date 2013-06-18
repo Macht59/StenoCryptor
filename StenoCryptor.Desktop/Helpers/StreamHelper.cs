@@ -76,14 +76,17 @@ namespace StenoCryptor.Desktop.Helpers
         /// <returns>Addres of file on server.</returns>
         public static string SaveFile(Stream stream, string fileName)
         {
-            using (FileStream fs = File.Create(fileName))
+            using (stream)
             {
-                byte[] bytesInStream = new byte[stream.Length];
-                stream.Position = 0;
-                stream.Read(bytesInStream, 0, (int)bytesInStream.Length);
-                fs.Write(bytesInStream, 0, bytesInStream.Length);
+                using (FileStream fs = File.Create(fileName))
+                {
+                    byte[] bytesInStream = new byte[stream.Length];
+                    stream.Position = 0;
+                    stream.Read(bytesInStream, 0, (int)bytesInStream.Length);
+                    fs.Write(bytesInStream, 0, bytesInStream.Length);
 
-                return fs.Name;
+                    return fs.Name;
+                }
             }
         }
 

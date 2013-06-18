@@ -25,5 +25,7 @@ namespace StenoCryptor.Commons
         public Stream InputStream { get; set; }
 
         public string ContentType { get; set; }
+
+
     }
 }

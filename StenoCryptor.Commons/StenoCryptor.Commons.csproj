@@ -41,6 +41,7 @@
   <ItemGroup>
     <Compile Include="Constants\Constants.cs" />
     <Compile Include="Container.cs" />
+    <Compile Include="Enums\EmbedingOptions.cs" />
     <Compile Include="Enums\CryptType.cs" />
     <Compile Include="Enums\EmbedType.cs" />
     <Compile Include="Key.cs" />
