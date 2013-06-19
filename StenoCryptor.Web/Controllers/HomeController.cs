@@ -73,7 +73,7 @@ namespace StenoCryptor.Web.Controllers
                 {
                     //Inject dependencies
                     ICryptor cryptor = _algorithmFactory.GetInstance(model.CryptType);
-                    IEmbeder embeder = _embederFactory.GetInstance(model.EmbedType);
+                    IEmbeder embeder = _embederFactory.GetInstance(model.EmbedType, Enums.Commons.EmbedingOptions.UseAlpha);
 
                     //Create container and key
                     Container container = new Container(photoFile.InputStream, photoFile.ContentType);
@@ -172,7 +172,7 @@ namespace StenoCryptor.Web.Controllers
 
             if (ModelState.IsValid)
             {
-                IEmbeder embeder = _embederFactory.GetInstance(key.EmbedType);
+                IEmbeder embeder = _embederFactory.GetInstance(key.EmbedType, Enums.Commons.EmbedingOptions.UseAlpha);
                 ICryptor cryptor = _algorithmFactory.GetInstance(key.CryptType);
                 Container container = new Container(photoFile.InputStream, photoFile.ContentType);
                 string message = DwmProcessorHelper.ExtractDwm(embeder, cryptor, key, container);
