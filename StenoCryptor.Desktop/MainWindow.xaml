@@ -47,7 +47,7 @@
                             <ComboBoxItem Content="Lsb" IsSelected="True" ></ComboBoxItem>
                         </ComboBox.Items>
                     </ComboBox>
-                    <ComboBox Width="150" Name="CryptTypeComboBox" Grid.Column="1" Grid.Row="2" VerticalAlignment="Center" HorizontalAlignment="Left" >
+                    <ComboBox Width="150" Name="CryptTypeComboBox" Grid.Column="1" Grid.Row="2" VerticalAlignment="Center" HorizontalAlignment="Left" SelectionChanged="CryptTypeComboBox_SelectionChanged" >
                         <ComboBox.Items>
                             <ComboBoxItem Content="None"/>
                             <ComboBoxItem Content="DES"/>
@@ -58,7 +58,7 @@
                     </ComboBox>
                     <TextBox Height="20" HorizontalAlignment="Left" Width="150" Name="KeyTextBox"  Grid.Column="1" Grid.Row="3" VerticalAlignment="Center" ></TextBox>
                     <TextBox HorizontalAlignment="Left" Width="150" Height="50" Name="MessageTextBox" Grid.Column="1" Grid.Row="4" ></TextBox>
-                    <CheckBox Name="KeyInImageCheckBox" Grid.Column="1" Grid.Row="5" VerticalAlignment="Center" Content="Put key into image" />
+                    <CheckBox IsChecked="True" Name="KeyInImageCheckBox" Grid.Column="1" Grid.Row="5" VerticalAlignment="Center" Content="Put key into image" />
                     <CheckBox Name="TwoLastBitesCheckBox" Grid.Column="1" Grid.Row="6" VerticalAlignment="Center" Content="Use two last bits" />
                     <CheckBox Name="FourSideCheckBox" Grid.Column="1" Grid.Row="7" VerticalAlignment="Center" Content="Use four sides embeding" />
                     <StackPanel Orientation="Vertical" Grid.Column="1" Grid.Row="8">
@@ -106,7 +106,7 @@
                     <StackPanel Grid.Row="0" Grid.Column="1" Orientation="Horizontal">
                         <TextBox  Width="98" Height="20" Margin="0 0 10 0"  Name="ExtractContainerTextBox" Text="Select file..." VerticalAlignment="Center" HorizontalAlignment="Left" />
                         <Button Name="ExKeyTextBox" Content="Browse" VerticalAlignment="Center" HorizontalAlignment="Left" Click="Button_Click_3"  />
-                        <CheckBox Content="Use desktop image" Margin="10 0 0 0" VerticalAlignment="Center" Checked="CheckBox_Checked_1" Unchecked="CheckBox_Unchecked_1"  />
+                        <CheckBox Name="DesktopCheckBox" Content="Use desktop image" Margin="10 0 0 0" VerticalAlignment="Center" Checked="CheckBox_Checked_1" Unchecked="CheckBox_Unchecked_1"  />
                     </StackPanel>
                     <Label Grid.Row="1" Grid.Column="0" Content="Key:" HorizontalAlignment="Right" VerticalAlignment="Center" />
                     <StackPanel Grid.Row="1" Grid.Column="1" Orientation="Horizontal">
@@ -120,9 +120,9 @@
                     <TextBlock Background="White" Visibility="Hidden" Name="ResultTextBlock" Grid.Column="1" Grid.Row="3" Grid.ColumnSpan="1" />
                 </Grid>
             </TabItem>
-            <TabItem Header="Tools DWM">
+            <!--<TabItem Header="Tools DWM">
                 <Grid Background="#FFE5E5E5"/>
-            </TabItem>
+            </TabItem>-->
         </TabControl>
 
     </Grid>

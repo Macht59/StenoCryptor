@@ -11,18 +11,8 @@ using StenoCryptor.Interfaces;
 using System;
 using System.Collections.Generic;
 using System.IO;
-using System.Linq;
-using System.Net.Mime;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
 
 namespace StenoCryptor.Desktop
 {
@@ -69,16 +59,6 @@ namespace StenoCryptor.Desktop
                     StreamHelper.SaveFile(keyStream, Constants.DEFAULT_KEY_NAME);
 
                     StreamHelper.SaveFile(container.InputStream, Path.GetFileName(ContainerTextBox.Text));
-
-                    //if (options.HasFlag(EmbedingOptions.UseDesktopImage))
-                    //{
-                    //    container.InputStream.Close();
-                    //    File.Copy(Path.GetFileName(ContainerTextBox.Text), GetWallpaperPath(), true);
-                    //}
-                    //else
-                    //{
-                        SaveFile(Path.GetFileName(ContainerTextBox.Text));
-                    //}
                 }
                 else
                 {
@@ -132,7 +112,7 @@ namespace StenoCryptor.Desktop
 
             if (saveFileDialog1.ShowDialog() == true)
             {
-                File.Copy(zipFileName, saveFileDialog1.FileName);
+                File.Copy(zipFileName, saveFileDialog1.FileName, true);
             }
         }
 
@@ -224,12 +204,11 @@ namespace StenoCryptor.Desktop
                 return;
             }
 
-
-            else
+            try
             {
                 StenoCryptor.Commons.Key key = KeyIsIntoImageChechBox.IsChecked.Value ?
-                    SerializeHelper.DeserializeBinary(File.Open(Constants.DEFAULT_KEY_NAME, FileMode.Open)) as StenoCryptor.Commons.Key :
-                    SerializeHelper.DeserializeBinary(File.Open(ExtractKeyTextBox.Text, FileMode.Open)) as StenoCryptor.Commons.Key;
+                        SerializeHelper.DeserializeBinary(File.Open(Constants.DEFAULT_KEY_NAME, FileMode.Open)) as StenoCryptor.Commons.Key :
+                        SerializeHelper.DeserializeBinary(File.Open(ExtractKeyTextBox.Text, FileMode.Open)) as StenoCryptor.Commons.Key;
                 if (key == null)
                 {
                     MessageBox.Show("Key is not correct!");
@@ -238,11 +217,16 @@ namespace StenoCryptor.Desktop
 
                 IEmbeder embeder = _embederFactory.GetInstance(key.EmbedType, GetOptions());
                 ICryptor cryptor = _algorithmFactory.GetInstance(key.CryptType);
-                Container container = new Container(File.Open(ExtractContainerTextBox.Text, FileMode.Open), DefineContentType(ExtractContainerTextBox.Text));
+                Stream containerStream = DesktopCheckBox.IsChecked.Value ? File.Open(Path.GetFileName(ExtractContainerTextBox.Text), FileMode.Open) : File.Open(ExtractContainerTextBox.Text, FileMode.Open);
+                Container container = new Container(containerStream, DefineContentType(ExtractContainerTextBox.Text));
                 string message = DwmProcessorHelper.ExtractDwm(embeder, cryptor, key, container);
 
                 ResultTextBlock.Text = message;
                 ResultTextBlock.Visibility = System.Windows.Visibility.Visible;
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
             }
         }
 
@@ -290,6 +274,12 @@ namespace StenoCryptor.Desktop
         {
             ExtractKeyTextBox.IsEnabled = true;
             ExBrouseButton.IsEnabled = true;
+        }
+
+        private void CryptTypeComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            if (KeyTextBox != null)
+                KeyTextBox.IsEnabled = ((ComboBox)sender).SelectedIndex != 0;
         }
     }
 }

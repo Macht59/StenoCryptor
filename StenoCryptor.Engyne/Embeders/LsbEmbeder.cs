@@ -1,14 +1,9 @@
 ﻿using StenoCryptor.Commons;
 using StenoCryptor.Commons.Constants;
-using StenoCryptor.Commons.Enums;
-using StenoCryptor.Engyne.Helpers;
 using StenoCryptor.Enums.Commons;
 using StenoCryptor.Interfaces;
 using System;
-using System.Collections.Generic;
 using System.Drawing;
-using System.Drawing.Imaging;
-using System.IO;
 
 namespace StenoCryptor.Engyne.Embeders
 {
@@ -16,6 +11,10 @@ namespace StenoCryptor.Engyne.Embeders
     {
         #region Constructors
 
+        /// <summary>
+        /// Initializes instance of LsbEmbeder class.
+        /// </summary>
+        /// <param name="options">Options of embeding.</param>
         public LsbEmbeder(EmbedingOptions options)
         {
             _options = options;
@@ -25,6 +24,11 @@ namespace StenoCryptor.Engyne.Embeders
 
         #region Public Logics
 
+        /// <summary>
+        /// Puts message into container.
+        /// </summary>
+        /// <param name="container">Container.</param>
+        /// <param name="message">Message.</param>
         public void Embed(Container container, byte[] message)
         {
             if (!container.ContentType.Contains(Constants.IMAGE_CONTENT_TYPE))
@@ -53,6 +57,12 @@ namespace StenoCryptor.Engyne.Embeders
             container.InputStream = SaveBitmap(bitmap, FormatFactory.GetInstance(container.ContentType));
         }
 
+        /// <summary>
+        /// Gets message from container.
+        /// </summary>
+        /// <param name="container">Container.</param>
+        /// <param name="key">Key.</param>
+        /// <returns>Hidden message.</returns>
         public byte[] Extract(Container container, Key key)
         {
             if (!container.ContentType.Contains(Constants.IMAGE_CONTENT_TYPE))
@@ -84,6 +94,13 @@ namespace StenoCryptor.Engyne.Embeders
 
         #region Private Logics
 
+        /// <summary>
+        /// Places data into pixel.
+        /// </summary>
+        /// <param name="pixelNumber">Number of used pixel.</param>
+        /// <param name="pixel">Pixel.</param>
+        /// <param name="messageArray">Message.</param>
+        /// <returns>Modified pixel.</returns>
         private Color insertDataIntoPixel(int pixelNumber, Color pixel, byte[] messageArray)
         {
             byte blue = pixel.B;
@@ -102,6 +119,12 @@ namespace StenoCryptor.Engyne.Embeders
             return Color.FromArgb(pixel.R, pixel.G, blue);
         }
 
+        /// <summary>
+        /// Extracts data from pixel.
+        /// </summary>
+        /// <param name="pixelNumber">Number of used pixel.</param>
+        /// <param name="pixel">Pixel.</param>
+        /// <param name="messageArray">Message.</param>
         private void extractDataFromPixel(int pixelNumber, Color pixel, byte[] messageArray)
         {
             byte blue = pixel.B;
@@ -122,6 +145,9 @@ namespace StenoCryptor.Engyne.Embeders
 
         #region Fields
 
+        /// <summary>
+        /// Embeding options.
+        /// </summary>
         private EmbedingOptions _options;
 
         #endregion
